@@ -6,7 +6,6 @@
 //  Copyright © 2018 Cartwheel Galaxy. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 import SpriteKit
 
@@ -56,13 +55,13 @@ struct Button {
         buttonSprite = SKSpriteNode.init(texture: normalTexture)
         
         // Calculates the position in the screen based on x and y location
-        let tempX: Int = (((xPos*2)-1)*Int((inThisScene.size.width-16)/6))+10
-        let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/10))
+        let tempX: Int = ((((xPos*2)-1)*Int(inThisScene.size.width*0.96/6))+Int(inThisScene.size.width*0.02))
+        let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/11))
         buttonSprite.position = CGPoint(x: tempX, y: tempY )
         
         // Resizing depending to screen size
-        let resizeFactorX:CGFloat = inThisScene.size.width/380.0
-        let resizeFactorY:CGFloat = inThisScene.size.height/550.0
+        let resizeFactorX:CGFloat = inThisScene.size.width/375.0
+        let resizeFactorY:CGFloat = inThisScene.size.height/650.0
         let originalSize = buttonSprite.size
         buttonSprite.size = CGSize(width: originalSize.width*resizeFactorX, height: originalSize.height*resizeFactorY)
         
@@ -113,5 +112,4 @@ struct Button {
         }
         return SKAction.sequence([SKAction.wait(forDuration: 0.07), normalButtonAction, soundEndAction])
     }
-    
 }
