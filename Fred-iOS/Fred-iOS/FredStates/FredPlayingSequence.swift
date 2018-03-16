@@ -11,6 +11,13 @@ import GameplayKit
 
 class FredPlayingSequence: FredState {
     
+    /// Keeps track of time
+    var pauseTimeCounter: TimeInterval = 0
+    
+    /// Defines the time interval between the Button Actions
+    static let pauseInterval = GameScene.intervalBetweenTurns
+    
+    
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredPlayingSequence")
     }
@@ -18,24 +25,11 @@ class FredPlayingSequence: FredState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        /// If Fred played full sequence go to PlayerPlayingSequence state
-        if (game.sequenceList.count == game.sequenceCounter) {
-            if !game.stateFredMachine.enter(PlayerPlayingSequence.self) {
-                print("Error 22")
-            }
-        }
-        else {
-            game.scoreboard.fredCount.text = "\(game.sequenceCounter+1)"
-            /// If is the last button of the sequence turn on fredNew sprite
-            if (game.sequenceCounter+1 == game.sequenceList.count) {
-                game.scoreboard.fredNew.texture = game.scoreboard.fredNewOn
-                game.scoreboard.fredRepeat.texture = game.scoreboard.fredRepeatOff
-            }
-            /// Fred will press next button on sequence
-            if !game.stateFredMachine.enter(FredPressButton.self) {
-                print("Error 23")
-            }
-        }
+        // State
+        game.scoreboard.stateSprint.texture = game.scoreboard.state2Texture
+        
+        /// Start timer
+        pauseTimeCounter = 0
     }
     
     override func willExit(to nextState: GKState) {
@@ -64,6 +58,36 @@ class FredPlayingSequence: FredState {
             return true
         default:
             return false
+        }
+    }
+    
+    override func update(deltaTime: TimeInterval) {
+        /// Keep track of the time since the last update.
+        pauseTimeCounter += deltaTime
+        
+        /// If an interval of pauseInterval has passed since the previous update
+        if pauseTimeCounter > FredPressButton.pauseInterval {
+            print(pauseTimeCounter)
+            
+            /// If Fred played full sequence go to PlayerPlayingSequence state
+            if (game.sequenceList.count == game.sequenceCounter) {
+                if !game.stateFredMachine.enter(PlayerPlayingSequence.self) {
+                    print("Error 22")
+                }
+            }
+            else {
+                game.scoreboard.fredCount.text = "\(game.sequenceCounter+1)"
+                /// If is the last button of the sequence turn on fredNew sprite
+                if (game.sequenceCounter+1 == game.sequenceList.count) {
+                    game.scoreboard.fredNew.texture = game.scoreboard.fredNewOn
+                    game.scoreboard.fredRepeat.texture = game.scoreboard.fredRepeatOff
+                    game.scoreboard.stateSprint.texture = game.scoreboard.state3Texture
+                }
+                /// Fred will press next button on sequence
+                if !game.stateFredMachine.enter(FredPressButton.self) {
+                    print("Error 23")
+                }
+            }
         }
     }
 }

@@ -18,7 +18,10 @@ class GameOver: FredState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        // Show Game Over Message
+        /// State
+        game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
+
+        /// Show Game Over Message
         game.gameOverMessage.gameOverLabel.isHidden = false
 
     }

@@ -15,7 +15,8 @@ class FredPressButton: FredState {
     var pauseTimeCounter: TimeInterval = 0
     
     /// Defines the time interval between the Button Actions
-    static let pauseInterval = 1.0
+    static let pauseInterval = GameScene.intervalButtonAnimation
+    
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredPressButton")
@@ -46,6 +47,7 @@ class FredPressButton: FredState {
         /// If an interval of pauseInterval has passed since the previous update start Button Action
         if pauseTimeCounter > FredPressButton.pauseInterval {
             print(pauseTimeCounter)
+            
             game.pressButtonFunction(buttonId: game.idButtonPlaying)
             if !game.stateFredMachine.enter(FredReleaseButton.self) {
                 print("Error 24")

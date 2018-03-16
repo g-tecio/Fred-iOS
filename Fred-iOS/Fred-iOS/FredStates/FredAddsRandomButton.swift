@@ -11,6 +11,13 @@ import GameplayKit
 
 class FredAddsRandomButton: FredState {
     
+    /// Keeps track of time
+    var pauseTimeCounter: TimeInterval = 0
+    
+    /// Defines the time interval between the Button Actions
+    static let pauseInterval = GameScene.intervalBetweenCycles
+
+    
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredAddsRandomButton")
     }
@@ -18,13 +25,14 @@ class FredAddsRandomButton: FredState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
+        /// State
+        game.scoreboard.stateSprint.texture = game.scoreboard.state2Texture
+        
         /// New Value added to end of sequence
         game.sequenceList.append(game.newValue.nextInt())
         
-        /// State change to FredPlayingSequence
-        if !game.stateFredMachine.enter(FredPlayingSequence.self) {
-            print("Error 21")
-        }
+        /// Start timer
+        pauseTimeCounter = 0
     }
     
     override func willExit(to nextState: GKState) {
@@ -37,5 +45,20 @@ class FredAddsRandomButton: FredState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is FredPlayingSequence.Type
+    }
+    
+    override func update(deltaTime: TimeInterval) {
+        /// Keep track of the time since the last update.
+        pauseTimeCounter += deltaTime
+        
+        /// If an interval of pauseInterval has passed since the previous update
+        if pauseTimeCounter > FredPressButton.pauseInterval {
+            print(pauseTimeCounter)
+            
+            /// State change to FredPlayingSequence
+            if !game.stateFredMachine.enter(FredPlayingSequence.self) {
+                print("Error 21")
+            }
+        }
     }
 }

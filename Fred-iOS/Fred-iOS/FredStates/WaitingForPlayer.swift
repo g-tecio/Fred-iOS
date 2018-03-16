@@ -15,7 +15,7 @@ class WaitingForPlayer: FredState {
     var pauseTimeCounter: TimeInterval = 0
     
     /// Defines the time interval to wait for Player
-    static let pauseInterval = 3.0
+    static let pauseInterval = GameScene.intervalPlayerWaiting
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "WaitingForPlayer")

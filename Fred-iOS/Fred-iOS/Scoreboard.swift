@@ -74,7 +74,7 @@ struct Scoreboard {
         fredLabel = SKLabelNode.init(text: "Fred")
         fredLabel.fontName = "Avenir-Heavy"
         fredLabel.horizontalAlignmentMode = .left
-        fredLabel.fontColor = .gray
+        fredLabel.fontColor = .lightGray
         fredLabel.fontSize = 24
         fredLabel.zPosition = 4
         fredLabel.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(backgroundScoreboardSprite.size.height*4/20))
@@ -83,7 +83,7 @@ struct Scoreboard {
         playerLabel = SKLabelNode.init(text: "Player")
         playerLabel.fontName = "Avenir-Heavy"
         playerLabel.horizontalAlignmentMode = .left
-        playerLabel.fontColor = .gray
+        playerLabel.fontColor = .lightGray
         playerLabel.fontSize = 24
         playerLabel.zPosition = 4
         playerLabel.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(-backgroundScoreboardSprite.size.height*2/20))
@@ -93,7 +93,7 @@ struct Scoreboard {
         fredRepeatOff = SKTexture(imageNamed: "RepeatOff")
         fredRepeat = SKSpriteNode.init(texture: fredRepeatOff)
         fredRepeat.zPosition = 4
-        fredRepeat.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*0/40), y: Int(backgroundScoreboardSprite.size.height*11/40))
+        fredRepeat.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*1/50), y: Int(backgroundScoreboardSprite.size.height*11/40))
         backgroundScoreboardSprite.addChild(fredRepeat)
         // New Symbol
         fredNewOn = SKTexture(imageNamed: "NewOn")
@@ -107,7 +107,7 @@ struct Scoreboard {
         playerCorrectOff = SKTexture.init(imageNamed: "CorrectOff")
         playerCorrect =  SKSpriteNode.init(texture: playerCorrectOff)
         playerCorrect.zPosition = 4
-        playerCorrect.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*0/40), y: Int(-backgroundScoreboardSprite.size.height*1/40))
+        playerCorrect.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*1/50), y: Int(-backgroundScoreboardSprite.size.height*1/40))
         backgroundScoreboardSprite.addChild(playerCorrect)
         // Error Symbol
         playerErrorOn = SKTexture.init(imageNamed: "ErrorOn")
@@ -130,7 +130,7 @@ struct Scoreboard {
         starValue = SKLabelNode.init(text: "5x=")
         starValue.fontName = "Avenir-Heavy"
         starValue.horizontalAlignmentMode = .left
-        starValue.fontColor = .gray
+        starValue.fontColor = .lightGray
         starValue.fontSize = 16
         starValue.zPosition = 4
         starValue.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(-backgroundScoreboardSprite.size.height*7/20))
@@ -139,7 +139,7 @@ struct Scoreboard {
         fredCount = SKLabelNode.init(text: "0")
         fredCount.fontName = "Avenir-Heavy"
         fredCount.horizontalAlignmentMode = .center
-        fredCount.fontColor = .gray
+        fredCount.fontColor = .lightGray
         fredCount.fontSize = 24
         fredCount.zPosition = 4
         fredCount.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*6/40), y: Int(backgroundScoreboardSprite.size.height*4/20))
@@ -148,7 +148,7 @@ struct Scoreboard {
         playerCount = SKLabelNode.init(text: "0")
         playerCount.fontName = "Avenir-Heavy"
         playerCount.horizontalAlignmentMode = .center
-        playerCount.fontColor = .gray
+        playerCount.fontColor = .lightGray
         playerCount.fontSize = 24
         playerCount.zPosition = 4
         playerCount.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*6/40), y: Int(-backgroundScoreboardSprite.size.height*2/20))
@@ -157,7 +157,7 @@ struct Scoreboard {
         scoreTitle = SKLabelNode.init(text: "Score")
         scoreTitle.fontName = "Avenir"
         scoreTitle.horizontalAlignmentMode = .center
-        scoreTitle.fontColor = .gray
+        scoreTitle.fontColor = .lightGray
         scoreTitle.fontSize = 20
         scoreTitle.zPosition = 4
         scoreTitle.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*14/40), y: Int(backgroundScoreboardSprite.size.height*6/20))
@@ -166,7 +166,7 @@ struct Scoreboard {
         score = SKLabelNode.init(text: "0")
         score.fontName = "Avenir-Heavy"
         score.horizontalAlignmentMode = .center
-        score.fontColor = .gray
+        score.fontColor = .lightGray
         score.fontSize = 46
         score.zPosition = 4
         score.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*14/40), y: Int(-backgroundScoreboardSprite.size.height*2/20))

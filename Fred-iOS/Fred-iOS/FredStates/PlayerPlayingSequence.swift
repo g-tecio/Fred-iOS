@@ -18,6 +18,9 @@ class PlayerPlayingSequence: FredState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
+        /// State
+        game.scoreboard.stateSprint.texture = game.scoreboard.state4Texture
+        
         /// If Player played full sequence go to FredAddsRandomButton state
         if (game.sequenceList.count == game.sequenceCounter) {
             if !game.stateFredMachine.enter(FredAddsRandomButton.self) {

@@ -17,6 +17,8 @@ class ReadyToPlay: FredState {
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
+        // State
+        game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
         
         /// Enable Start Button
         game.startButton.startButtonSprite.texture = game.startButton.startOnTexture
@@ -44,8 +46,9 @@ class ReadyToPlay: FredState {
         game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
         game.scoreboard.playerError.texture = game.scoreboard.playerErrorOff
         game.scoreboard.playerCount.text = "0"
-        game.scoreboard.playerCount.fontColor = .black
+        game.scoreboard.playerCount.fontColor = .darkGray
         game.scoreboard.score.text = "0"
+        game.scoreboard.score.fontColor = .black
         for i in 1...10 {
             game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
         }

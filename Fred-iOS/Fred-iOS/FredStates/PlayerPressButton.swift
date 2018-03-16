@@ -30,6 +30,7 @@ class PlayerPressButton: FredState {
         /// If button is wrong set playerErrorOn
         else {
             game.scoreboard.playerError.texture = game.scoreboard.playerErrorOn
+            game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
         }
     }
     

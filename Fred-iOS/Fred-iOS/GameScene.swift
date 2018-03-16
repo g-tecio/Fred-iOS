@@ -10,34 +10,39 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    // State Game Machine
+    
+    /// Configuration
+    static let intervalButtonAnimation = 0.5
+    static let intervalBetweenCycles = 0.5
+    static let intervalPlayerWaiting = 3.0
+    static let intervalBetweenTurns = 0.5
+    
+    /// State Game Machine
     var stateFredMachine: GKStateMachine!
     
-    /// Keeps track of the time for use in the update method.
+    //// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
-    // Buttons
+    /// Buttons
     var fredButtons: [Button] = []
     var idButtonPlaying: Int = 0
+    var isOtherButtonPlaying = false
     var isSoundEnding: Bool = false
     
-    // Start Button
+    /// StartButton, Scoreboard and GameOverMessage
     var startButton: StartButton!
-    
-    // Scoreboard
     var scoreboard: Scoreboard!
-    
-    // Game Over message
     var gameOverMessage: GameOverMessage!
     
-    // Game variables
+    /// Random generator
+    let newValue = GKRandomDistribution(lowestValue: 1, highestValue: 12)
+    
+    /// Game variables
     var sequenceCounter:Int = 0
     var sequenceList:[Int] = []
     var cycles: Int = 0
     var score: Int = 0
     
-    let newValue = GKRandomDistribution(lowestValue: 1, highestValue: 12)
- 
     override func didMove(to view: SKView) {
         // Fred Buttons
         for button in 01...12 {
@@ -71,14 +76,15 @@ class GameScene: SKScene {
         isSoundEnding = true
         fredButtons[idButtonPlaying-1].buttonSprite.run(
             fredButtons[idButtonPlaying-1].releaseButtonAction, completion: {
-//                self.idButtonPlaying = 0
                 self.isSoundEnding = false
+                self.isOtherButtonPlaying = false
         }
         )
     }
     
     func pressButtonFunction(buttonId: Int) {
         idButtonPlaying = buttonId
+        isOtherButtonPlaying = true
         fredButtons[idButtonPlaying-1].buttonSprite.run(fredButtons[idButtonPlaying-1].pressButtonAction)
     }
     
@@ -121,8 +127,7 @@ class GameScene: SKScene {
                 // Allowed to play buttons when ReadyToPlay state, no effect on Game
                 else {
                     for n in 1...12 {
-//                        if (fredButtons[n-1].buttonSprite === item) && (idButtonPlaying == 0) {
-                        if (fredButtons[n-1].buttonSprite === item) {
+                        if (fredButtons[n-1].buttonSprite === item) && (isOtherButtonPlaying == false) {
                             pressButtonFunction(buttonId: n)
                         }
                     }
