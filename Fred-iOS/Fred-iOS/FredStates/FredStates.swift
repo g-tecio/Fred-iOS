@@ -21,10 +21,10 @@ class FredState: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        print("Entering state: \(associatedStateName)")
+//        print("Entering state: \(associatedStateName)")
     }
     
     override func willExit(to nextState: GKState) {
-        print("Exiting state: \(associatedStateName)")
+//        print("Exiting state: \(associatedStateName)")
     }
 }

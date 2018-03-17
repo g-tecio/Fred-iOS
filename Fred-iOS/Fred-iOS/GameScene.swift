@@ -12,10 +12,10 @@ import GameplayKit
 class GameScene: SKScene {
     
     /// Configuration
-    static let intervalButtonAnimation = 0.5
     static let intervalBetweenCycles = 0.5
+    static let intervalButtonAnimation = 0.35
+    static let intervalBetweenTurns = 0.07
     static let intervalPlayerWaiting = 3.0
-    static let intervalBetweenTurns = 0.5
     
     /// State Game Machine
     var stateFredMachine: GKStateMachine!
@@ -67,9 +67,7 @@ class GameScene: SKScene {
                                                         GameOver(game: self)
                                                     ])
         // Tells the state machine to enter the ReadyToPlay state
-        if !(stateFredMachine.enter(ReadyToPlay.self)) {
-            print("Error 0")
-        }
+        stateFredMachine.enter(ReadyToPlay.self)
     }
     
     func releaseButtonFunction() {
@@ -89,13 +87,16 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Calculate the time change since the previous update.
-        let timeSincePreviousUpdate = currentTime - previousUpdateTime
-    
-        // The following states use the update: FredPressButton, FredReleaseButton and WaitingForPlayer
-        stateFredMachine.update(deltaTime: timeSincePreviousUpdate)
         
-        // Set previousUpdateTime to the current time, so the next update has accurate information
+        /// Set previousUpdateTime for the first time
+        if previousUpdateTime == 0 {
+            previousUpdateTime = currentTime
+        }
+        
+        /// For the states that have update(deltaTime:) send the delta time
+        stateFredMachine.update(deltaTime: currentTime - previousUpdateTime)
+        
+        /// Update previousUpdateTime to be current
         previousUpdateTime = currentTime
     }
 
@@ -104,27 +105,19 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             let item = atPoint(location)
             
-            // Dismiss Game Over Message
+            /// Dismiss Game Over Message
              if (stateFredMachine.currentState is GameOver) {
-                let gameOverLabel = childNode(withName: "//gameOverLabel")!
-                if (gameOverLabel === item) {
-                    if !stateFredMachine.enter(ReadyToPlay.self) {
-                        print("Error 1")
-                    }
+                if (gameOverMessage.gameOverLabel === item) {
+                    stateFredMachine.enter(ReadyToPlay.self)
                 }
             }
             
-            // Start Play Button
+            /// Start Play Button
             if (stateFredMachine.currentState is ReadyToPlay) {
-                let startButton = childNode(withName: "//startButton")!
-                let startLabel = childNode(withName: "//startLabel")!
-
-                if (startButton === item) || (startLabel === item){
-                    if !stateFredMachine.enter(FredAddsRandomButton.self) {
-                        print("Error 2")
-                    }
+                if (startButton.startButtonSprite === item) || (startButton.startLabel === item){
+                    stateFredMachine.enter(FredAddsRandomButton.self)
                 }
-                // Allowed to play buttons when ReadyToPlay state, no effect on Game
+                /// Allowed to play buttons when ReadyToPlay state, no effect on Game
                 else {
                     for n in 1...12 {
                         if (fredButtons[n-1].buttonSprite === item) && (isOtherButtonPlaying == false) {
@@ -134,15 +127,13 @@ class GameScene: SKScene {
                 }
             }
             
-            // Waiting for Player
+            /// Waiting for Player
             if (stateFredMachine.currentState is WaitingForPlayer) {
                 for n in 1...12 {
                     if (fredButtons[n-1].buttonSprite === item) {
                         idButtonPlaying = n
                         // State change to PlayerPressButton
-                        if !stateFredMachine.enter(PlayerPressButton.self) {
-                            print("Error 3")
-                        }
+                        stateFredMachine.enter(PlayerPressButton.self)
                     }
                 }
             }
@@ -157,11 +148,7 @@ class GameScene: SKScene {
         }
         if (stateFredMachine.currentState is PlayerPressButton) {
             releaseButtonFunction()
-            if !stateFredMachine.enter(PlayerReleaseButton.self) {
-                print("Error 4")
-            }
+            stateFredMachine.enter(PlayerReleaseButton.self)
         }
-        
     }
-    
 }

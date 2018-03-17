@@ -11,12 +11,8 @@ import GameplayKit
 
 class FredPressButton: FredState {
     
-    /// Keeps track of pauses between Button Actions
+    /// Timer Variables
     var pauseTimeCounter: TimeInterval = 0
-    
-    /// Defines the time interval between the Button Actions
-    static let pauseInterval = GameScene.intervalButtonAnimation
-    
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredPressButton")
@@ -27,7 +23,12 @@ class FredPressButton: FredState {
         
         // Get next Button from the sequence and play it once counter reaches pauseInterval
         game.idButtonPlaying = game.sequenceList[game.sequenceCounter]
+        
+        /// Start timer
         pauseTimeCounter = 0
+        
+        /// Button Press Action Starts
+        game.pressButtonFunction(buttonId: game.idButtonPlaying)
     }
     
     override func willExit(to nextState: GKState) {
@@ -44,14 +45,9 @@ class FredPressButton: FredState {
         /// Keep track of the time since the last update.
         pauseTimeCounter += deltaTime
         
-        /// If an interval of pauseInterval has passed since the previous update start Button Action
-        if pauseTimeCounter > FredPressButton.pauseInterval {
-            print(pauseTimeCounter)
-            
-            game.pressButtonFunction(buttonId: game.idButtonPlaying)
-            if !game.stateFredMachine.enter(FredReleaseButton.self) {
-                print("Error 24")
-            }
+        /// If an interval of pauseInterval has passed go to FredReleaseButton state
+        if pauseTimeCounter > GameScene.intervalButtonAnimation {
+           game.stateFredMachine.enter(FredReleaseButton.self)
         }
     }
 }

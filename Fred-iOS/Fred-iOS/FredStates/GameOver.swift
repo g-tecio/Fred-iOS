@@ -19,7 +19,7 @@ class GameOver: FredState {
         super.didEnter(from: previousState)
         
         /// State
-        game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
+        game.scoreboard.stateSprint.texture = game.scoreboard.state5Texture
 
         /// Show Game Over Message
         game.gameOverMessage.gameOverLabel.isHidden = false

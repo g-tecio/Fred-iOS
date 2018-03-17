@@ -11,11 +11,8 @@ import GameplayKit
 
 class WaitingForPlayer: FredState {
     
-    /// Keeps track of waiting time
+    /// Timer variables
     var pauseTimeCounter: TimeInterval = 0
-    
-    /// Defines the time interval to wait for Player
-    static let pauseInterval = GameScene.intervalPlayerWaiting
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "WaitingForPlayer")
@@ -24,7 +21,7 @@ class WaitingForPlayer: FredState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        /// Start timer, if reaches pauseInterval it will go to GameOver state
+        /// Start timer
         pauseTimeCounter = 0
     }
     
@@ -48,11 +45,8 @@ class WaitingForPlayer: FredState {
         pauseTimeCounter += deltaTime
         
         /// If an interval of pauseInterval has passed since the previous update GameOver
-        if pauseTimeCounter > WaitingForPlayer.pauseInterval {
-            print(pauseTimeCounter)
-            if !game.stateFredMachine.enter(GameOver.self) {
-                print("Error 28")
-            }
+        if pauseTimeCounter > GameScene.intervalPlayerWaiting {
+            game.stateFredMachine.enter(GameOver.self)
         }
     }
 }

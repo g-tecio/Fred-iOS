@@ -11,6 +11,9 @@ import GameplayKit
 
 class FredReleaseButton: FredState {
     
+    /// Timer variables
+    var pauseTimeCounter: TimeInterval = 0
+    
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredReleaseButton")
     }
@@ -20,9 +23,7 @@ class FredReleaseButton: FredState {
         
         /// Start button release action
         game.releaseButtonFunction()
-        if !game.stateFredMachine.enter(FredPlayingSequence.self) {
-            print("Error 25")
-        }
+        pauseTimeCounter = 0
     }
     
     override func willExit(to nextState: GKState) {
@@ -36,4 +37,13 @@ class FredReleaseButton: FredState {
         return stateClass is FredPlayingSequence.Type
     }
     
+    override func update(deltaTime: TimeInterval) {
+        /// Keep track of the time since the last update.
+        pauseTimeCounter += deltaTime
+        
+        /// If an interval of pauseInterval has passed since the previous update
+        if pauseTimeCounter > GameScene.intervalBetweenTurns {
+            game.stateFredMachine.enter(FredPlayingSequence.self)
+        }
+    }
 }

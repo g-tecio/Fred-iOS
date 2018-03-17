@@ -23,15 +23,11 @@ class PlayerPlayingSequence: FredState {
         
         /// If Player played full sequence go to FredAddsRandomButton state
         if (game.sequenceList.count == game.sequenceCounter) {
-            if !game.stateFredMachine.enter(FredAddsRandomButton.self) {
-                print("Error 26")
-            }
+            game.stateFredMachine.enter(FredAddsRandomButton.self)
         }
         else {
             /// Go to WaitingForPlayer state
-            if !game.stateFredMachine.enter(WaitingForPlayer.self) {
-                print("Error 27")
-            }
+            game.stateFredMachine.enter(WaitingForPlayer.self)
         }
     }
     
@@ -43,12 +39,27 @@ class PlayerPlayingSequence: FredState {
         }
         if nextState is FredAddsRandomButton {
             
+            /// Game variables
             game.sequenceCounter = 0
+            game.cycles += 1
+            
             /// Set Sprites
             game.scoreboard.playerLabel.fontColor = .lightGray
             game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
             game.scoreboard.fredLabel.fontColor = .blue
             game.scoreboard.fredCount.text = "0"
+            
+            game.scoreboard.playerStars[(game.cycles-1) % 5].texture = game.scoreboard.starOn
+            
+            if (game.cycles % 5) == 0 {
+                for i in 1...5 {
+                    game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
+                }
+            }
+            if (game.cycles >= 5) {
+                game.scoreboard.playerStars[Int(game.cycles/5)+4].texture = game.scoreboard.starOn
+            }
+            
         }
     }
     

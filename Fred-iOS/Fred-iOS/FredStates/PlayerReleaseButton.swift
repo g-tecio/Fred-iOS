@@ -22,15 +22,11 @@ class PlayerReleaseButton: FredState {
         game.releaseButtonFunction()
         /// If button is correct go to PlayerPlayingSequence state
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
-            if !game.stateFredMachine.enter(PlayerPlayingSequence.self) {
-                print("Error 29")
-            }
+            game.stateFredMachine.enter(PlayerPlayingSequence.self)
         }
         /// If button is wrong then go to GameOver state
         else {
-            if !game.stateFredMachine.enter(GameOver.self) {
-                print("Error 30")
-            }
+            game.stateFredMachine.enter(GameOver.self)
         }
     }
     

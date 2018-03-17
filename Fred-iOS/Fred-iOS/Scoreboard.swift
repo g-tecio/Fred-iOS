@@ -119,10 +119,17 @@ struct Scoreboard {
         // Stars
         starOn = SKTexture.init(imageNamed: "StarOn")
         starOff = SKTexture.init(imageNamed: "StarOff")
-        for starNum in 1...10 {
+        for starNum in 1...5 {
             let starTemp = SKSpriteNode.init(texture: starOff)
             starTemp.zPosition = 4
-            starTemp.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width/15*CGFloat(starNum-4)), y: Int(-backgroundScoreboardSprite.size.height*6/20))
+            starTemp.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width/17*CGFloat(starNum-6)), y: Int(-backgroundScoreboardSprite.size.height*6/20))
+            backgroundScoreboardSprite.addChild(starTemp)
+            playerStars.append(starTemp)
+        }
+        for starNum in 1...5 {
+            let starTemp = SKSpriteNode.init(texture: starOff)
+            starTemp.zPosition = 4
+            starTemp.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width/17*CGFloat(starNum+2)), y: Int(-backgroundScoreboardSprite.size.height*6/20))
             backgroundScoreboardSprite.addChild(starTemp)
             playerStars.append(starTemp)
         }
@@ -131,9 +138,9 @@ struct Scoreboard {
         starValue.fontName = "Avenir-Heavy"
         starValue.horizontalAlignmentMode = .left
         starValue.fontColor = .lightGray
-        starValue.fontSize = 16
-        starValue.zPosition = 4
-        starValue.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(-backgroundScoreboardSprite.size.height*7/20))
+        starValue.fontSize = 18
+        starValue.zPosition = 5
+        starValue.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*1/40), y: Int(-backgroundScoreboardSprite.size.height*19/50))
         backgroundScoreboardSprite.addChild(starValue)
         // Fred Counter
         fredCount = SKLabelNode.init(text: "0")

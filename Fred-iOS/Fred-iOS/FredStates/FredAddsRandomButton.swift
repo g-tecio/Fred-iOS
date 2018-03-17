@@ -11,12 +11,8 @@ import GameplayKit
 
 class FredAddsRandomButton: FredState {
     
-    /// Keeps track of time
+    /// Timer variables
     var pauseTimeCounter: TimeInterval = 0
-    
-    /// Defines the time interval between the Button Actions
-    static let pauseInterval = GameScene.intervalBetweenCycles
-
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredAddsRandomButton")
@@ -51,14 +47,9 @@ class FredAddsRandomButton: FredState {
         /// Keep track of the time since the last update.
         pauseTimeCounter += deltaTime
         
-        /// If an interval of pauseInterval has passed since the previous update
-        if pauseTimeCounter > FredPressButton.pauseInterval {
-            print(pauseTimeCounter)
-            
-            /// State change to FredPlayingSequence
-            if !game.stateFredMachine.enter(FredPlayingSequence.self) {
-                print("Error 21")
-            }
+        /// If an interval of pauseInterval has passed got to FredPlayingSequence state
+        if pauseTimeCounter > GameScene.intervalBetweenCycles {
+            game.stateFredMachine.enter(FredPlayingSequence.self)
         }
     }
 }
