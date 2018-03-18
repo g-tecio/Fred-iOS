@@ -26,9 +26,8 @@ class GameScene: SKScene {
     /// Buttons
     var fredButtons: [Button] = []
     var idButtonPlaying: Int = 0
-    var isOtherButtonPlaying = false
-    var isSoundEnding: Bool = false
-    
+	var isOtherButtonPlaying: Bool = false
+	
     /// StartButton, Scoreboard and GameOverMessage
     var startButton: StartButton!
     var scoreboard: Scoreboard!
@@ -69,23 +68,19 @@ class GameScene: SKScene {
         // Tells the state machine to enter the ReadyToPlay state
         stateFredMachine.enter(ReadyToPlay.self)
     }
-    
-    func releaseButtonFunction() {
-        isSoundEnding = true
-        fredButtons[idButtonPlaying-1].buttonSprite.run(
-            fredButtons[idButtonPlaying-1].releaseButtonAction, completion: {
-                self.isSoundEnding = false
-                self.isOtherButtonPlaying = false
-        }
-        )
+	
+	
+	func pressButtonFunction(buttonId: Int) {
+		idButtonPlaying = buttonId
+		isOtherButtonPlaying = true
+		fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].pressButtonAction )
+	}
+	
+	func releaseButtonFunction() {
+		self.isOtherButtonPlaying = false
+        fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].releaseButtonAction)
     }
-    
-    func pressButtonFunction(buttonId: Int) {
-        idButtonPlaying = buttonId
-        isOtherButtonPlaying = true
-        fredButtons[idButtonPlaying-1].buttonSprite.run(fredButtons[idButtonPlaying-1].pressButtonAction)
-    }
-    
+	
     override func update(_ currentTime: TimeInterval) {
         
         /// Set previousUpdateTime for the first time
@@ -141,11 +136,13 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+		
         if (stateFredMachine.currentState is ReadyToPlay) {
-            if (idButtonPlaying != 0) && (isSoundEnding == false) {
+            if (isOtherButtonPlaying) {
                 releaseButtonFunction()
             }
         }
+		
         if (stateFredMachine.currentState is PlayerPressButton) {
             releaseButtonFunction()
             stateFredMachine.enter(PlayerReleaseButton.self)

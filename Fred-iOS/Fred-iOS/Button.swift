@@ -22,50 +22,56 @@ let dictionaryButtonValues =   [01: (color: "Brown",       note: 261.63, xPos: 1
                                 11: (color: "Pink",        note: 698.46, xPos: 2, yPos: 1),
                                 12: (color: "Yellow",      note: 783.99, xPos: 3, yPos: 1)]
 
+/// Button Struct - Where magic happens!
 struct Button {
-    // Sprite, textures and action for button
+	
+    /// Sprite, textures and action for button
     let buttonSprite: SKSpriteNode
     let normalTexture: SKTexture
     let lightedTexture: SKTexture
     var pressButtonAction: SKAction = SKAction.init()
     var releaseButtonAction: SKAction = SKAction.init()
-    // Values for button
+	
+    /// Control variables for button
     let idButton: Int
     let color: String
     let note: Double
     let xPos: Int
     let yPos: Int
-    // Sound
+	
+    /// Sound for button
     let audioTonePlayerNode: AVAudioPlayerNode = AVAudioPlayerNode.init()
     let bufferWithTone: AVAudioPCMBuffer
     let bufferCapacity: AVAudioFrameCount = 512
     let amplitud = 0.12
 
+	/// Initialization
     init (idButton: Int, inThisScene: GameScene) {
-        // Assign values to respective button
+		
+        /// Assign values to respective button
         self.idButton = idButton
         self.color = (dictionaryButtonValues[idButton]?.color)!
         self.note = (dictionaryButtonValues[idButton]?.note)!
         self.xPos = (dictionaryButtonValues[idButton]?.xPos)!
         self.yPos = (dictionaryButtonValues[idButton]?.yPos)!
         
-        // Assign textures to buttonSprite
+        /// Assign textures to buttonSprite
         normalTexture = SKTexture(imageNamed: color + "N")
         lightedTexture = SKTexture(imageNamed: color + "H")
         buttonSprite = SKSpriteNode.init(texture: normalTexture)
         
-        // Calculates the position in the screen based on x and y location
+        /// Calculates the position in the screen based on x and y location
         let tempX: Int = ((((xPos*2)-1)*Int(inThisScene.size.width*0.96/6))+Int(inThisScene.size.width*0.02))
         let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/11))
         buttonSprite.position = CGPoint(x: tempX, y: tempY )
         
-        // Resizing depending to screen size
+        /// Resizing depending to screen size
         let resizeFactorX:CGFloat = inThisScene.size.width/375.0
         let resizeFactorY:CGFloat = inThisScene.size.height/650.0
         let originalSize = buttonSprite.size
         buttonSprite.size = CGSize(width: originalSize.width*resizeFactorX, height: originalSize.height*resizeFactorY)
         
-        // Sound  setup
+        /// Create Tone and load into Buffer
         inThisScene.audioEngine.attach(audioTonePlayerNode)
         inThisScene.audioEngine.connect(audioTonePlayerNode,
                                         to: inThisScene.audioEngine.mainMixerNode,
@@ -82,34 +88,43 @@ struct Button {
         }
         buffer?.frameLength = frame
         bufferWithTone = buffer!
-        // Actions creator
+		
+		/// Set up PlayerNote
+		audioTonePlayerNode.scheduleBuffer(bufferWithTone, at: nil, options: .loops, completionHandler: { })
+		
+		/// Actions creator
         pressButtonAction = pressActionCreator(self)
         releaseButtonAction = releaseActionCreator(self)
-        // Add button to scene
+		
+        /// Add button to scene
         inThisScene.addChild(buttonSprite)
     }
-    
+	
+	/// Setup ButtonPressed Actions
     func pressActionCreator(_ thisButton: Button) -> SKAction{
-        // Setup ButtonPressed Actions
+		
         let lightButtonAction = SKAction.animate(with: [lightedTexture], timePerFrame: 0.0)
+		
         let soundStartAction = SKAction.run {
             if thisButton.audioTonePlayerNode.isPlaying == false {
-                thisButton.audioTonePlayerNode.scheduleBuffer(thisButton.bufferWithTone, at: nil, options: .loops, completionHandler: { })
                 thisButton.audioTonePlayerNode.play()
             }
         }
+		
         return SKAction.sequence([lightButtonAction, soundStartAction])
     }
-    
+	
+	/// Setup ButtonReleased Actions
     func releaseActionCreator(_ thisButton: Button) -> SKAction{
-        // Setup ButtonReleased Actions
-        let normalButtonAction = SKAction.animate(with: [normalTexture], timePerFrame: 0.0)
+		
         let soundEndAction = SKAction.run {
             if thisButton.audioTonePlayerNode.isPlaying == true {
-                thisButton.audioTonePlayerNode.stop()
-                thisButton.audioTonePlayerNode.reset()
+                thisButton.audioTonePlayerNode.pause()
             }
         }
-        return SKAction.sequence([SKAction.wait(forDuration: 0.07), normalButtonAction, soundEndAction])
+		
+		let normalButtonAction = SKAction.animate(with: [normalTexture], timePerFrame: 0.0)
+		
+        return SKAction.sequence([SKAction.wait(forDuration: 0.1), soundEndAction, normalButtonAction])
     }
 }
