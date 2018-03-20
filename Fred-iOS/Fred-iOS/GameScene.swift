@@ -29,8 +29,8 @@ class GameScene: SKScene {
 	var isOtherButtonPlaying: Bool = false
 	
     /// StartButton, Scoreboard and GameOverMessage
-    var startButton: StartButton!
     var scoreboard: Scoreboard!
+	var gameControls: GameControls!
     var gameOverMessage: GameOverMessage!
     
     /// Random generator
@@ -50,7 +50,7 @@ class GameScene: SKScene {
         // Scoreboard
         scoreboard = Scoreboard.init(inThisScene: self)
         // Startbutton
-        startButton = StartButton.init(inThisScene: self)
+        gameControls = GameControls.init(inThisScene: self)
         // Game Over
         gameOverMessage = GameOverMessage.init(inThisScene: self)
         // Creates and adds states to the dispenser's state machine.
@@ -109,16 +109,25 @@ class GameScene: SKScene {
             
             /// Start Play Button
             if (stateFredMachine.currentState is ReadyToPlay) {
-                if (startButton.startButtonSprite === item) || (startButton.startLabel === item){
+                if (gameControls.startButtonSprite === item) || (gameControls.startLabel === item){
                     stateFredMachine.enter(FredAddsRandomButton.self)
                 }
                 /// Allowed to play buttons when ReadyToPlay state, no effect on Game
                 else {
-                    for n in 1...12 {
-                        if (fredButtons[n-1].buttonSprite === item) && (isOtherButtonPlaying == false) {
-                            pressButtonFunction(buttonId: n)
-                        }
-                    }
+					if gameControls.configButtonSprite === item {
+						
+						// Present Config screen
+//						let configScene = SKScene.init(fileNamed: "ConfigScene.sks")
+						print("Configuration page")
+						
+					}
+					else {
+						for n in 1...12 {
+							if (fredButtons[n-1].buttonSprite === item) && (isOtherButtonPlaying == false) {
+								pressButtonFunction(buttonId: n)
+							}
+						}
+					}
                 }
             }
             

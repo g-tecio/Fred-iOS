@@ -21,8 +21,8 @@ class ReadyToPlay: FredState {
         game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
         
         /// Enable Start Button
-        game.startButton.startButtonSprite.texture = game.startButton.startOnTexture
-        game.startButton.startLabel.text = "Press to Play"
+        game.gameControls.startButtonSprite.texture = game.gameControls.startOnTexture
+        game.gameControls.startLabel.text = "Press to Play"
     }
     
     override func willExit(to nextState: GKState) {
@@ -35,8 +35,8 @@ class ReadyToPlay: FredState {
         game.score = 0
         
         /// Labels and textures set to Start Game
-        game.startButton.startButtonSprite.texture = game.startButton.startOffTexture
-        game.startButton.startLabel.text = "Playing"
+        game.gameControls.startButtonSprite.texture = game.gameControls.startOffTexture
+        game.gameControls.startLabel.text = "Playing"
         game.scoreboard.fredLabel.fontColor = .lightGray
         game.scoreboard.fredRepeat.texture = game.scoreboard.fredRepeatOff
         game.scoreboard.fredNew.texture = game.scoreboard.fredNewOff
