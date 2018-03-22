@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class ReadyToPlay: FredState {
+class ReadyToPlay: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "ReadyToPlay")

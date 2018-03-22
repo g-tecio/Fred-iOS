@@ -59,7 +59,7 @@ struct Scoreboard {
         backgroundScoreboardSprite.position = CGPoint(x: inThisScene.size.width/2, y: (inThisScene.size.height*12/13)-30)
         let originalSize = backgroundScoreboardSprite.size
         backgroundScoreboardSprite.size = CGSize(width: originalSize.width*resizeFactorX, height: originalSize.height*resizeFactorY)
-        inThisScene.addChild(backgroundScoreboardSprite)
+//        inThisScene.addChild(backgroundScoreboardSprite)
         // State indicator
         state1Texture = SKTexture(imageNamed: "state1")
         state2Texture = SKTexture(imageNamed: "state2")

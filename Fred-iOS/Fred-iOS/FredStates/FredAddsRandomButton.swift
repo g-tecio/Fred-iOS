@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class FredAddsRandomButton: FredState {
+class FredAddsRandomButton: FredGameState {
     
     /// Timer variables
     var pauseTimeCounter: TimeInterval = 0
@@ -49,7 +49,7 @@ class FredAddsRandomButton: FredState {
         
         /// If an interval of pauseInterval has passed got to FredPlayingSequence state
         if pauseTimeCounter > GameScene.intervalBetweenCycles {
-            game.stateFredMachine.enter(FredPlayingSequence.self)
+            game.fredGameStateMachine.enter(FredPlayingSequence.self)
         }
     }
 }

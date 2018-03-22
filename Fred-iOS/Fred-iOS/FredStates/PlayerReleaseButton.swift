@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class PlayerReleaseButton: FredState {
+class PlayerReleaseButton: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "PlayerReleaseButton")
@@ -22,11 +22,11 @@ class PlayerReleaseButton: FredState {
         game.releaseButtonFunction()
         /// If button is correct go to PlayerPlayingSequence state
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
-            game.stateFredMachine.enter(PlayerPlayingSequence.self)
+            game.fredGameStateMachine.enter(PlayerPlayingSequence.self)
         }
         /// If button is wrong then go to GameOver state
         else {
-            game.stateFredMachine.enter(GameOver.self)
+            game.fredGameStateMachine.enter(GameOver.self)
         }
     }
     

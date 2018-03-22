@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class PlayerPlayingSequence: FredState {
+class PlayerPlayingSequence: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "PlayerPlayingSequence")
@@ -23,11 +23,11 @@ class PlayerPlayingSequence: FredState {
         
         /// If Player played full sequence go to FredAddsRandomButton state
         if (game.sequenceList.count == game.sequenceCounter) {
-            game.stateFredMachine.enter(FredAddsRandomButton.self)
+            game.fredGameStateMachine.enter(FredAddsRandomButton.self)
         }
         else {
             /// Go to WaitingForPlayer state
-            game.stateFredMachine.enter(WaitingForPlayer.self)
+            game.fredGameStateMachine.enter(WaitingForPlayer.self)
         }
     }
     

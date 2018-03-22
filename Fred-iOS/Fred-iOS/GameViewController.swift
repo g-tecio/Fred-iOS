@@ -8,32 +8,45 @@
 
 import UIKit
 import SpriteKit
+import GameplayKit
 
 class GameViewController: UIViewController {
-
+	
+	/// Scene State Machine
+	var sceneStateMachine: GKStateMachine!
+	
+	/// Scenes variables
+	var gameScene: GameScene!
+	var configScene: ConfigScene!
+	
+	/// Main initialization
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let view = self.view as! SKView? {
-            let scene = GameScene(size: view.bounds.size)
-            scene.scaleMode = .aspectFill
-            view.presentScene(scene)
-            view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+		
+		/// GameScene Setup - with Code
+		gameScene = GameScene.init(sceneSize: view.bounds.size, referenceGVC: self)
+
+		/// ConfigScene Setup - with File
+		configScene = ConfigScene.init(fileNamed: "ConfigScene", referenceGVC: self)
+		
+		/// Creates SceneStateMachine and adds states, then enters GameSceneState
+		sceneStateMachine = GKStateMachine(states: [	GameSceneState(referenceGVC: self),
+														ConfigSceneState(referenceGVC: self)
+			])
+		sceneStateMachine.enter(GameSceneState.self)
+		
     }
 
     override var shouldAutorotate: Bool {
         return false
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-
     override var prefersStatusBarHidden: Bool {
         return false
     }
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+	}
+	
 }

@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class WaitingForPlayer: FredState {
+class WaitingForPlayer: FredGameState {
     
     /// Timer variables
     var pauseTimeCounter: TimeInterval = 0
@@ -46,7 +46,7 @@ class WaitingForPlayer: FredState {
         
         /// If an interval of pauseInterval has passed since the previous update GameOver
         if pauseTimeCounter > GameScene.intervalPlayerWaiting {
-            game.stateFredMachine.enter(GameOver.self)
+            game.fredGameStateMachine.enter(GameOver.self)
         }
     }
 }

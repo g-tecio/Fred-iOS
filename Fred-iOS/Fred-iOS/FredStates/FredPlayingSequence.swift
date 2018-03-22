@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class FredPlayingSequence: FredState {
+class FredPlayingSequence: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "FredPlayingSequence")
@@ -23,7 +23,7 @@ class FredPlayingSequence: FredState {
         
         /// If Fred played full sequence go to PlayerPlayingSequence state
         if (game.sequenceList.count == game.sequenceCounter) {
-            game.stateFredMachine.enter(PlayerPlayingSequence.self)
+            game.fredGameStateMachine.enter(PlayerPlayingSequence.self)
         }
         else {
             game.scoreboard.fredCount.text = "\(game.sequenceCounter+1)"
@@ -34,7 +34,7 @@ class FredPlayingSequence: FredState {
                 game.scoreboard.stateSprint.texture = game.scoreboard.state3Texture
             }
             /// Fred will press next button on sequence
-            game.stateFredMachine.enter(FredPressButton.self)
+            game.fredGameStateMachine.enter(FredPressButton.self)
         }
     }
     

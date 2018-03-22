@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameOver: FredState {
+class GameOver: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "GameOver")

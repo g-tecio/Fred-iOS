@@ -16,7 +16,7 @@ struct GameControls {
 	let startOffTexture: SKTexture
 	let startLabel: SKLabelNode
 	
-//	/// Sound On/Off
+	/// Sound On/Off
 //	let soundToggle:SKSpriteNode
 
 	/// Configuration Button
@@ -29,7 +29,7 @@ struct GameControls {
 		startOffTexture = SKTexture(imageNamed: "StartOff")
 		startButtonSprite = SKSpriteNode.init(texture: startOnTexture)
 		startButtonSprite.name = "startButton"
-		startButtonSprite.zPosition = 0
+		startButtonSprite.zPosition = 1
 		startButtonSprite.position = CGPoint(x: inThisScene.size.width/2, y: (inThisScene.size.height*1/13)-15)
 		
 		/// Resizing depending to screen size
@@ -39,7 +39,7 @@ struct GameControls {
 		startButtonSprite.size = CGSize(width: originalSize.width*resizeFactorX, height: originalSize.height*resizeFactorY)
 		
 		/// Add Button to Scene
-		inThisScene.addChild(startButtonSprite)
+		//inThisScene.addChild(startButtonSprite)
 		
 		/// Start Game label
 		startLabel = SKLabelNode.init(text: "Loading...")
@@ -49,7 +49,7 @@ struct GameControls {
 		startLabel.verticalAlignmentMode = .center
 		startLabel.fontColor = .white
 		startLabel.fontSize = 24
-		startLabel.zPosition = 1
+		startLabel.zPosition = 2
 		startLabel.position = CGPoint(x: 0, y: 0)
 		
 		/// Add Label to Scene
@@ -57,11 +57,11 @@ struct GameControls {
 		
 		/// Configuration Button
 		configButtonSprite = SKSpriteNode.init(imageNamed: "cogButtonBlack")
-		configButtonSprite.zPosition = 1
+		configButtonSprite.zPosition = 3
 		configButtonSprite.position = CGPoint(x: inThisScene.size.width*45/50, y: (inThisScene.size.height*1/13)-15)
 		
 		/// Add Label to Scene
-		inThisScene.addChild(configButtonSprite)
+		//inThisScene.addChild(configButtonSprite)
 		
 	}
 

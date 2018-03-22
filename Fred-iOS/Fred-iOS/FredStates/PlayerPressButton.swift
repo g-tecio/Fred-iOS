@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class PlayerPressButton: FredState {
+class PlayerPressButton: FredGameState {
     
     required init(game: GameScene) {
         super.init(game: game, associatedStateName: "PlayerPressButton")

@@ -26,6 +26,6 @@ struct GameOverMessage {
         gameOverLabel.isHidden = true
         gameOverLabel.position = CGPoint(x: inThisScene.size.width/2, y: inThisScene.size.height/2)
         // Add to Scene
-        inThisScene.addChild(gameOverLabel)
+//        inThisScene.addChild(gameOverLabel)
     }
 }

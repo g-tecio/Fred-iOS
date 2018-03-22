@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class FredReleaseButton: FredState {
+class FredReleaseButton: FredGameState {
     
     /// Timer variables
     var pauseTimeCounter: TimeInterval = 0
@@ -43,7 +43,7 @@ class FredReleaseButton: FredState {
         
         /// If an interval of pauseInterval has passed since the previous update
         if pauseTimeCounter > GameScene.intervalBetweenTurns {
-            game.stateFredMachine.enter(FredPlayingSequence.self)
+            game.fredGameStateMachine.enter(FredPlayingSequence.self)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FredStates.swift
+//  FredGameState.swift
 //  Fred-iOS
 //
 //  Created by Fernando Vazquez on 3/12/18.
@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class FredState: GKState {
+class FredGameState: GKState {
     
     let game: GameScene
     let associatedStateName: String

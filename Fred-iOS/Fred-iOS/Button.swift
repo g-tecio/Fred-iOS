@@ -97,7 +97,7 @@ struct Button {
         releaseButtonAction = releaseActionCreator(self)
 		
         /// Add button to scene
-        inThisScene.addChild(buttonSprite)
+//        inThisScene.addChild(buttonSprite)
     }
 	
 	/// Setup ButtonPressed Actions
