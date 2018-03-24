@@ -21,8 +21,8 @@ class FredReleaseButton: FredGameState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-        /// Start button release action
-        game.releaseButtonFunction()
+        /// Start immediate button release action 
+        game.immediateReleaseButtonFunction()
         pauseTimeCounter = 0
     }
     

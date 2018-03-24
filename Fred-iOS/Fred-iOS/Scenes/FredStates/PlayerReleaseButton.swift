@@ -19,7 +19,7 @@ class PlayerReleaseButton: FredGameState {
         super.didEnter(from: previousState)
         
         /// Button release
-        game.releaseButtonFunction()
+        game.delayedReleaseButtonFunction()
         /// If button is correct go to PlayerPlayingSequence state
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
             game.fredGameStateMachine.enter(PlayerPlayingSequence.self)

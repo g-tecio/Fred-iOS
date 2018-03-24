@@ -12,41 +12,41 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 	
-	/// Scene State Machine
-	var sceneStateMachine: GKStateMachine!
+	// MARK: App Properties
 	
-	/// Scenes variables
-	var gameScene: GameScene!
-	var configScene: ConfigScene!
+		/// Scene State Machine
+		var sceneStateMachine: GKStateMachine!
 	
-	/// Main initialization
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-		/// GameScene Setup - with Code
-		gameScene = GameScene.init(sceneSize: view.bounds.size, referenceGVC: self)
-
-		/// ConfigScene Setup - with File
-		configScene = ConfigScene.init(fileNamed: "ConfigScene", referenceGVC: self)
-		
-		/// Creates SceneStateMachine and adds states, then enters GameSceneState
-		sceneStateMachine = GKStateMachine(states: [	GameSceneState(referenceGVC: self),
-														ConfigSceneState(referenceGVC: self)
-			])
-		sceneStateMachine.enter(GameSceneState.self)
-		
-    }
-
-    override var shouldAutorotate: Bool {
-        return false
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
+		/// Scenes
+		var gameScene: GameScene!
+		var configScene: ConfigScene!
 	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
+		/// Configuration
+		var intervalBetweenCycles = 9
+		var intervalButtonAnimation = 21
+		var intervalBetweenTurns = 4
+		var intervalPlayerWaiting = 180
+		var delayedReleaseTime = 3
+	
+	// MARK: Override Methods
+	
+		override func viewDidLoad() {
+			super.viewDidLoad()
+			
+			/// GameScene Setup - with Code
+			gameScene = GameScene.init(sceneSize: view.bounds.size, referenceGVC: self)
+
+			/// ConfigScene Setup - with File
+			configScene = ConfigScene.init(fileNamed: "ConfigScene", referenceGVC: self)
+			
+			/// Creates SceneStateMachine and adds states, then enters GameSceneState
+			sceneStateMachine = GKStateMachine(states: [	GameSceneState(referenceGVC: self),
+															ConfigSceneState(referenceGVC: self) ] )
+			sceneStateMachine.enter(GameSceneState.self)
+		}
+	
+		override func didReceiveMemoryWarning() {
+			super.didReceiveMemoryWarning()
+		}
 	
 }

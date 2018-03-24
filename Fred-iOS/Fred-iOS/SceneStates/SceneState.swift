@@ -11,20 +11,25 @@ import GameplayKit
 
 class SceneState: GKState {
 	
-	let gameViewController: GameViewController
-	let sceneStateName: String
+	// MARK: SceneState Properties
 	
+		let gameViewController: GameViewController
+		let sceneStateName: String
+	
+	// MARK: Initializer
 	
 	init(referenceGVC: GameViewController, sceneStateName: String) {
 		self.gameViewController = referenceGVC
 		self.sceneStateName = sceneStateName
-	}
+		}
 	
-	override func didEnter(from previousState: GKState?) {
-		print("Entering state: \(sceneStateName)")
-	}
+	// MARK: Overrride Methos
 	
-	override func willExit(to nextState: GKState) {
-		print("Exiting state: \(sceneStateName)")
-	}
+		override func didEnter(from previousState: GKState?) {
+//			print("Entering state: \(sceneStateName)")
+		}
+	
+		override func willExit(to nextState: GKState) {
+//			print("Exiting state: \(sceneStateName)")
+		}
 }

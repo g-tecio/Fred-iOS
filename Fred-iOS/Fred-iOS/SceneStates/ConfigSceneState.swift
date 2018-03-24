@@ -10,41 +10,33 @@ import SpriteKit
 import GameplayKit
 
 class ConfigSceneState: SceneState {
-	
-	required init(referenceGVC: GameViewController) {
-		super.init(referenceGVC: referenceGVC, sceneStateName: "ConfigSceneState")
 
-		/// Load scene
-		if let skView = gameViewController.view as! SKView? {
-			
-			gameViewController.configScene.scaleMode = .aspectFill
-			
-			// Comment or remove before release to App Store
-			skView.ignoresSiblingOrder = true
-			skView.showsFPS = true
-			skView.showsNodeCount = true
+	// MARK: Properties
+	
+	
+	// MARK: Initializer
+
+		required init(referenceGVC: GameViewController) {
+			super.init(referenceGVC: referenceGVC, sceneStateName: "ConfigSceneState")
 		}
-	}
+
+	// MARK: Overrride Methos
 	
-	override func didEnter(from previousState: GKState?) {
-		super.didEnter(from: previousState)
-		
-		/// Load scene
-		if let skView = gameViewController.view as! SKView? {
-			skView.presentScene(gameViewController.configScene)
+		override func didEnter(from previousState: GKState?) {
+			super.didEnter(from: previousState)
+			
+			/// Present scene
+			if let skView = gameViewController.view as! SKView? {
+				skView.presentScene(gameViewController.configScene, transition: SKTransition.flipVertical(withDuration: 0.3))
+			}
 		}
-		
-	}
 	
-	override func willExit(to nextState: GKState) {
-		super.willExit(to: nextState)
-		
-		// TODO: Unload Scene
-		
-	}
+		override func willExit(to nextState: GKState) {
+			super.willExit(to: nextState)
+		}
 	
-	override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-		return stateClass is GameSceneState.Type
-	}
+		override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+			return stateClass is GameSceneState.Type
+		}
 	
 }
