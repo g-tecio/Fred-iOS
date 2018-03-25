@@ -45,7 +45,7 @@ class WaitingForPlayer: FredGameState {
         pauseTimeCounter += deltaTime
         
         /// If an interval of pauseInterval has passed since the previous update GameOver
-        if pauseTimeCounter > GameScene.intervalPlayerWaiting {
+        if pauseTimeCounter > Double(GameData.shared.framesPlayerWaiting)/60.0 {
             game.fredGameStateMachine.enter(GameOver.self)
         }
     }

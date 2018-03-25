@@ -46,7 +46,7 @@ class FredPressButton: FredGameState {
         pauseTimeCounter += deltaTime
         
         /// If an interval of pauseInterval has passed go to FredReleaseButton state
-        if pauseTimeCounter > GameScene.intervalButtonAnimation {
+        if pauseTimeCounter > Double(GameData.shared.framesButtonAnimation)/60.0 {
            game.fredGameStateMachine.enter(FredReleaseButton.self)
         }
     }

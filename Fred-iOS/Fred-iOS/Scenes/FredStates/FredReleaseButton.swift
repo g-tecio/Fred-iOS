@@ -22,7 +22,7 @@ class FredReleaseButton: FredGameState {
         super.didEnter(from: previousState)
         
         /// Start immediate button release action 
-        game.immediateReleaseButtonFunction()
+		game.delayedReleaseButtonFunction(delayed: false)
         pauseTimeCounter = 0
     }
     
@@ -42,7 +42,7 @@ class FredReleaseButton: FredGameState {
         pauseTimeCounter += deltaTime
         
         /// If an interval of pauseInterval has passed since the previous update
-        if pauseTimeCounter > GameScene.intervalBetweenTurns {
+        if pauseTimeCounter > Double(GameData.shared.framesBetweenTurns)/60 {
             game.fredGameStateMachine.enter(FredPlayingSequence.self)
         }
     }

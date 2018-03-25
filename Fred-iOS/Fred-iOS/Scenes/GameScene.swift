@@ -12,14 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
 	
 	// MARK: Game Properties
-	
-		/// Configuration
-		static let intervalBetweenCycles: Double = 9.0/60.0
-		static let intervalButtonAnimation: Double  = 21.0/60.0
-		static let intervalBetweenTurns: Double  = 4.0/60.0
-		static let intervalPlayerWaiting: Double  = 180.0/60.0
-		static let delayedReleaseTime: Double  = 3.0/60.0
-	
+
 		/// State Game Machine
 		var fredGameStateMachine: GKStateMachine!
 	
@@ -116,32 +109,19 @@ class GameScene: SKScene {
 		}
 	
 		/// Delayed Release Button
-		func delayedReleaseButtonFunction() {
+	func delayedReleaseButtonFunction(delayed: Bool) {
 			
 			for n in 1...12 {
 				if fredButtons[n-1].buttonSprite.hasActions() {
 					fredButtons[n-1].buttonSprite.removeAllActions()
 				}
-				if idButtonPlaying == n {
-					fredButtons[n-1].buttonSprite.run( fredButtons[n-1].delayedReleaseButtonAction )
+				if (idButtonPlaying == n && delayed && GameData.shared.framesDelayedRelease > 0) {
+					fredButtons[n-1].buttonSprite.run( SKAction.sequence([SKAction.wait(forDuration: Double(GameData.shared.framesDelayedRelease)/60.0), fredButtons[n-1].immediateReleaseButtonAction]))
 				}
 				else {
-					fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
+						fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
 				}
 			}
-			self.isAButtonPlaying = false
-		}
-	
-		/// Immediate Release Button
-		func immediateReleaseButtonFunction() {
-			
-			for n in 1...12 {
-				if fredButtons[n-1].buttonSprite.hasActions() {
-					fredButtons[n-1].buttonSprite.removeAllActions()
-				}
-				fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
-			}
-			
 			self.isAButtonPlaying = false
 		}
 	
@@ -237,7 +217,7 @@ class GameScene: SKScene {
 			
 			/// Release Button Action when on practice mode
 			if (fredGameStateMachine.currentState is ReadyToPlay) {
-				delayedReleaseButtonFunction()
+				delayedReleaseButtonFunction(delayed: true)
 			}
 			
 			/// Release Button Action when on game mode

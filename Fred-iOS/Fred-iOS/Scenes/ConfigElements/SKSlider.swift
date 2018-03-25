@@ -10,97 +10,127 @@ import SpriteKit
 
 class SliderSK: SKNode {
 	
-	/// SliderSK element
-	var sliderSKElement: SKShapeNode!
+	// MARK: Properties
 	
-	/// SliderSK LabelTitle and LabelValue
-	var labelTitleSliderSK: SKLabelNode!
-	var labelValueSliderSK: SKLabelNode!
+		/// Constants - modify by code if adjustments required
+		let heightPoints: CGFloat = 10.0
+		let lineThickness: CGFloat = 2.0
 	
+		/// SliderSK element and backgroundLine
+		var sliderSKElement: SKShapeNode!
+		var backgroundSliderSK: SKSpriteNode!
 	
-	/// SliderSK Background
-	var backgroundSliderSK: SKSpriteNode!
+		/// SliderSK LabelTitle and LabelValue
+		var labelTitleSliderSK: SKLabelNode!
+		var labelValueSliderSK: SKLabelNode!
 	
-	/// SliderSK Value
-	var valueSliderSK: Int = 0 {
-		didSet {
-			sliderSKElement.position = CGPoint(x: (-CGFloat(backgroundSliderSK.size.width)/2.0)+CGFloat(backgroundSliderSK.size.width)/CGFloat(maxSliderSK-minSliderSK)*CGFloat(valueSliderSK), y: CGFloat(0.0))
-			labelValueSliderSK.text = "\(valueSliderSK)"
+		/// Slider Status
+		var beingChanged: Bool = false
+	
+		/// Values
+		var minValue: Int = 0
+		var maxValue: Int = 60
+		var rangeValue: Int = 60
+	
+		/// Points
+		var widthPoints: CGFloat = 380.0
+		var minPoint: CGFloat = 38.0
+		var maxPoint: CGFloat = 342.0
+		var rangePoint: CGFloat = 304.0
+	
+		/// SliderSK Value
+		var valueSliderSK: Int = 0 {
+			didSet {
+				valueSliderSK = valueSliderSK>maxValue ? maxValue : valueSliderSK
+				valueSliderSK = valueSliderSK<minValue ? minValue : valueSliderSK
+				
+				sliderSKElement.position = CGPoint(x: pointFromValue(value: valueSliderSK), y: CGFloat(0.0))
+				labelValueSliderSK.text = "\(valueSliderSK)"
+			}
 		}
-	}
-	
-	/// SliderSK Max and Min
-	var minSliderSK: Int = 0
-	var maxSliderSK: Int = 60
 
-	/// SliderSK Width
-	var widthSliderSK: CGFloat {
-		return backgroundSliderSK.frame.size.width
-	}
+	// MARK: Initializers
 	
-	// SliderSK Height
-	var heightSliderSK: CGFloat {
-		return sliderSKElement.frame.size.height
-	}
-	
-	private(set) var actionClicked: Selector?
-	private(set) var targetClicked: AnyObject?
-	
-	init(width: Int, height: Int, text: String) {
-		
-		super.init()
-		
-		/// Label Title setup
-		labelTitleSliderSK = SKLabelNode(fontNamed: "Helvetica Bold")
-		labelTitleSliderSK.text = text
-		labelTitleSliderSK.fontSize = 36
-		labelTitleSliderSK.fontColor = .yellow
-		labelTitleSliderSK.horizontalAlignmentMode = .center
-		labelTitleSliderSK.verticalAlignmentMode = .bottom
-		labelTitleSliderSK.position = CGPoint(x: CGFloat(0.0), y: CGFloat(height)*2.0)
-		
-		/// Label Value setup
-		labelValueSliderSK = SKLabelNode(fontNamed: "Helvetica Bold")
-		labelValueSliderSK.text = "\(valueSliderSK)"
-		labelValueSliderSK.fontSize = 36
-		labelValueSliderSK.fontColor = .white
-		labelValueSliderSK.horizontalAlignmentMode = .center
-		labelValueSliderSK.verticalAlignmentMode = .top
-		labelValueSliderSK.position = CGPoint(x: CGFloat(0.0), y: CGFloat(-height)*2.0)
-		
-		// Background
-		backgroundSliderSK = SKSpriteNode(color: .cyan, size: CGSize(width: CGFloat(width), height: CGFloat(6)))
-		backgroundSliderSK.position = CGPoint(x: CGFloat(0.0), y: CGFloat(0.0))
-		
-		/// Slider
-		sliderSKElement = SKShapeNode(circleOfRadius: CGFloat( height ) )
-		sliderSKElement.fillColor = .white
-		sliderSKElement.position = CGPoint(x: CGFloat(-width)/2.0 + sliderSKElement.position.x , y: CGFloat(0.0))
+		init(inThisScene: ConfigScene, initialValue: Int, minValue: Int, maxValue: Int, title: String, postionY: CGFloat) {
+			super.init()
+			
+			/// Values initialization
+			self.minValue = minValue
+			self.maxValue = maxValue
+			self.rangeValue = maxValue-minValue
+			self.valueSliderSK = initialValue
+			
+			/// Points
+			self.widthPoints = inThisScene.size.width*0.8
+			self.minPoint = inThisScene.size.width*0.1
+			self.maxPoint = inThisScene.size.width*0.9
+			self.rangePoint = maxPoint-minPoint
+			
+			// Position on Screen for SlideSK
+			self.position.y = postionY
+			self.name = title
+			
+			/// Label Title setup
+			labelTitleSliderSK = SKLabelNode(fontNamed: "Helvetica Bold")
+			labelTitleSliderSK.text = title
+			labelTitleSliderSK.fontSize = 18
+			labelTitleSliderSK.fontColor = .yellow
+			labelTitleSliderSK.horizontalAlignmentMode = .center
+			labelTitleSliderSK.verticalAlignmentMode = .bottom
+			labelTitleSliderSK.zPosition = 1
+			labelTitleSliderSK.position = CGPoint(x: inThisScene.size.width/2, y: heightPoints*2.0)
+			labelTitleSliderSK.name = title
+			
+			/// Label Value setup
+			labelValueSliderSK = SKLabelNode(fontNamed: "Helvetica Bold")
+			labelValueSliderSK.text = "\(valueSliderSK)"
+			labelValueSliderSK.fontSize = 18
+			labelValueSliderSK.fontColor = .white
+			labelValueSliderSK.horizontalAlignmentMode = .center
+			labelValueSliderSK.verticalAlignmentMode = .top
+			labelValueSliderSK.zPosition = 1
+			labelValueSliderSK.position = CGPoint(x: inThisScene.size.width/2, y: -heightPoints*2.0)
+			labelValueSliderSK.name = title
+			
+			// Background
+			backgroundSliderSK = SKSpriteNode(color: .cyan, size: CGSize(width: rangePoint, height: lineThickness))
+			backgroundSliderSK.position = CGPoint(x:inThisScene.size.width/2, y: CGFloat(0.0))
+			backgroundSliderSK.zPosition = 1
+			backgroundSliderSK.name = title
+			
+			/// Slider
+			sliderSKElement = SKShapeNode(circleOfRadius: heightPoints)
+			sliderSKElement.fillColor = .white
+			sliderSKElement.zPosition = 2
+			sliderSKElement.position = CGPoint(x: pointFromValue(value: valueSliderSK), y: CGFloat(0.0))
+			sliderSKElement.name = title
 
-		
-		// Add to SliderSK Node
-		addChild(labelTitleSliderSK)
-		addChild(labelValueSliderSK)
-		addChild(backgroundSliderSK)
-		addChild(sliderSKElement)
-	}
+			// Add to SliderSK Node
+			addChild(labelTitleSliderSK)
+			addChild(labelValueSliderSK)
+			addChild(backgroundSliderSK)
+			addChild(sliderSKElement)
+		}
 	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-		/// Background Color
-		backgroundSliderSK.color = .gray
-
-		let x = touches.first!.location(in: self).x - backgroundSliderSK.position.x
-		print(x)
-		let pos = max(fmin(x, widthSliderSK), 0.0)
-		print(pos)
-		
-		sliderSKElement!.position = CGPoint(x: CGFloat(backgroundSliderSK.position.x + pos), y: CGFloat(0.0))
-		valueSliderSK = Int(pos / widthSliderSK)
-		_ = targetClicked!.perform(actionClicked, with: self)
-	}
+		required init?(coder aDecoder: NSCoder) {
+			fatalError("init(coder:) has not been implemented")
+		}
+	
+	// MARK: Custom Methods
+	
+		func pointFromValue(value: Int) -> CGFloat {
+			let point = (CGFloat(value)*rangePoint/CGFloat(rangeValue)) + CGFloat(minPoint)
+			return point
+		}
+	
+		func setValueFromPoint(point: CGFloat) -> Int {
+			
+			let value = Int((point-minPoint)*CGFloat(rangeValue)/rangePoint)
+			
+			valueSliderSK = value>maxValue ? maxValue : value
+			valueSliderSK = value<minValue ? minValue : value
+			
+			return valueSliderSK
+		}
 
 }

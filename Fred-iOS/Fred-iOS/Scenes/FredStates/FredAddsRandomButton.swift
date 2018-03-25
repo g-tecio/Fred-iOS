@@ -48,7 +48,7 @@ class FredAddsRandomButton: FredGameState {
         pauseTimeCounter += deltaTime
         
         /// If an interval of pauseInterval has passed got to FredPlayingSequence state
-        if pauseTimeCounter > GameScene.intervalBetweenCycles {
+        if pauseTimeCounter > Double(GameData.shared.framesBetweenCycles)/60 {
             game.fredGameStateMachine.enter(FredPlayingSequence.self)
         }
     }

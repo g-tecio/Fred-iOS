@@ -14,6 +14,8 @@
 		CB1A10AD2057995900AB0F82 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A10AC2057995900AB0F82 /* Scoreboard.swift */; };
 		CB233B372061F3F200FC1A32 /* ConfigScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB233B362061F3F200FC1A32 /* ConfigScene.swift */; };
 		CB5FCED9206623BC000BE1DF /* SKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5FCED8206623BC000BE1DF /* SKSlider.swift */; };
+		CB5FCEDB20670724000BE1DF /* ConfigControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5FCEDA20670724000BE1DF /* ConfigControls.swift */; };
+		CB5FCEDD2067230A000BE1DF /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5FCEDC2067230A000BE1DF /* GameData.swift */; };
 		CB779063205A1862004A3213 /* FredAddsRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779062205A1862004A3213 /* FredAddsRandomButton.swift */; };
 		CB779065205A1880004A3213 /* ReadyToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779064205A1880004A3213 /* ReadyToPlay.swift */; };
 		CB779067205A18A2004A3213 /* FredPlayingSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779066205A18A2004A3213 /* FredPlayingSequence.swift */; };
@@ -25,7 +27,6 @@
 		CB779073205A191E004A3213 /* PlayerReleaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779072205A191E004A3213 /* PlayerReleaseButton.swift */; };
 		CB779075205A192F004A3213 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779074205A192F004A3213 /* GameOver.swift */; };
 		CB779078205A537C004A3213 /* GameOverMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779077205A537C004A3213 /* GameOverMessage.swift */; };
-		CB7F67F720608A0D00C4C314 /* ConfigScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB7F67F620608A0D00C4C314 /* ConfigScene.sks */; };
 		CB7F67F9206092F100C4C314 /* GameControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7F67F8206092F100C4C314 /* GameControls.swift */; };
 		CB9084F7204F42FE00CA0E57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9084F6204F42FE00CA0E57 /* AppDelegate.swift */; };
 		CB9084FD204F42FE00CA0E57 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9084FC204F42FE00CA0E57 /* GameScene.swift */; };
@@ -44,6 +45,8 @@
 		CB1A10AC2057995900AB0F82 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		CB233B362061F3F200FC1A32 /* ConfigScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigScene.swift; sourceTree = "<group>"; };
 		CB5FCED8206623BC000BE1DF /* SKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSlider.swift; sourceTree = "<group>"; };
+		CB5FCEDA20670724000BE1DF /* ConfigControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControls.swift; sourceTree = "<group>"; };
+		CB5FCEDC2067230A000BE1DF /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		CB779062205A1862004A3213 /* FredAddsRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FredAddsRandomButton.swift; sourceTree = "<group>"; };
 		CB779064205A1880004A3213 /* ReadyToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToPlay.swift; sourceTree = "<group>"; };
 		CB779066205A18A2004A3213 /* FredPlayingSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FredPlayingSequence.swift; sourceTree = "<group>"; };
@@ -55,7 +58,6 @@
 		CB779072205A191E004A3213 /* PlayerReleaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReleaseButton.swift; sourceTree = "<group>"; };
 		CB779074205A192F004A3213 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		CB779077205A537C004A3213 /* GameOverMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverMessage.swift; sourceTree = "<group>"; };
-		CB7F67F620608A0D00C4C314 /* ConfigScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ConfigScene.sks; sourceTree = "<group>"; };
 		CB7F67F8206092F100C4C314 /* GameControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControls.swift; sourceTree = "<group>"; };
 		CB9084F3204F42FE00CA0E57 /* Fred-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fred-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9084F6204F42FE00CA0E57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +98,6 @@
 				CB19F62220637AAA0020AD28 /* GameElements */,
 				CB779076205A193B004A3213 /* FredStates */,
 				CB233B362061F3F200FC1A32 /* ConfigScene.swift */,
-				CB7F67F620608A0D00C4C314 /* ConfigScene.sks */,
 				CB5FCED7206623A0000BE1DF /* ConfigElements */,
 			);
 			path = Scenes;
@@ -117,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				CB5FCED8206623BC000BE1DF /* SKSlider.swift */,
+				CB5FCEDA20670724000BE1DF /* ConfigControls.swift */,
 			);
 			path = ConfigElements;
 			sourceTree = "<group>";
@@ -160,6 +162,7 @@
 			children = (
 				CB9084F6204F42FE00CA0E57 /* AppDelegate.swift */,
 				CB9084FE204F42FE00CA0E57 /* GameViewController.swift */,
+				CB5FCEDC2067230A000BE1DF /* GameData.swift */,
 				CB19F62120635CB60020AD28 /* Scenes */,
 				CB19F61A2062C6410020AD28 /* SceneStates */,
 				CB908503204F42FE00CA0E57 /* Assets.xcassets */,
@@ -232,7 +235,6 @@
 			files = (
 				CB908502204F42FE00CA0E57 /* Main.storyboard in Resources */,
 				CB908504204F42FE00CA0E57 /* Assets.xcassets in Resources */,
-				CB7F67F720608A0D00C4C314 /* ConfigScene.sks in Resources */,
 				CB908507204F42FE00CA0E57 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,9 +252,11 @@
 				CB77906F205A18ED004A3213 /* WaitingForPlayer.swift in Sources */,
 				CB7F67F9206092F100C4C314 /* GameControls.swift in Sources */,
 				CB779067205A18A2004A3213 /* FredPlayingSequence.swift in Sources */,
+				CB5FCEDD2067230A000BE1DF /* GameData.swift in Sources */,
 				CB9084FF204F42FE00CA0E57 /* GameViewController.swift in Sources */,
 				CB779071205A1914004A3213 /* PlayerPressButton.swift in Sources */,
 				CB77906B205A18CA004A3213 /* FredReleaseButton.swift in Sources */,
+				CB5FCEDB20670724000BE1DF /* ConfigControls.swift in Sources */,
 				CB233B372061F3F200FC1A32 /* ConfigScene.swift in Sources */,
 				CB9084F7204F42FE00CA0E57 /* AppDelegate.swift in Sources */,
 				CB1A10AD2057995900AB0F82 /* Scoreboard.swift in Sources */,

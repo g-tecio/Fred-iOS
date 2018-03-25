@@ -30,7 +30,6 @@ struct Button {
     let normalTexture: SKTexture
     let lightedTexture: SKTexture
     var pressButtonAction: SKAction = SKAction.init()
-    var delayedReleaseButtonAction: SKAction = SKAction.init()
 	var immediateReleaseButtonAction: SKAction = SKAction.init()
 	
     /// Control variables for button
@@ -94,7 +93,6 @@ struct Button {
 		
 		/// Actions creator
 		pressButtonAction = pressActionCreator(thisButton: self)
-        delayedReleaseButtonAction = delayedReleaseActionCreator(thisButton: self)
 		immediateReleaseButtonAction = immediateReleaseActionCreator(thisButton: self)
     }
 	
@@ -113,23 +111,6 @@ struct Button {
 		
 		/// Return Action for Press
         return SKAction.group([lightButtonAction, soundStartAction])
-    }
-	
-	// Delayed ButtonReleased Action
-    func delayedReleaseActionCreator(thisButton: Button) -> SKAction{
-		
-		/// Action to turn off light in button
-		let normalButtonAction = SKAction.animate(with: [normalTexture], timePerFrame: 0.0)
-		
-		/// Action to end Sound
-        let soundEndAction = SKAction.run {
-            if thisButton.audioTonePlayerNode.isPlaying {
-                thisButton.audioTonePlayerNode.pause()
-            }
-        }
-		
-		/// Return action for Release
-        return SKAction.sequence( [SKAction.wait(forDuration: GameScene.delayedReleaseTime), SKAction.group( [soundEndAction, normalButtonAction] )] )
     }
 	
 	// Immediate ButtonReleased Action

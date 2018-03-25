@@ -1,5 +1,5 @@
 //
-//  Control.swift
+//  GameControls.swift
 //  Fred-iOS
 //
 //  Created by Fernando Vazquez on 3/19/18.
@@ -15,9 +15,6 @@ struct GameControls {
 	let startOnTexture: SKTexture
 	let startOffTexture: SKTexture
 	let startLabel: SKLabelNode
-	
-	/// Sound On/Off
-//	let soundToggle:SKSpriteNode
 
 	/// Configuration Button
 	let configButtonSprite:SKSpriteNode
