@@ -17,9 +17,9 @@ class GameData {
 	}
 	
 	/// Configuration values
-	var framesBetweenCycles: Int = 9
-	var framesButtonAnimation: Int  = 21
-	var framesBetweenTurns: Int  = 4
+	var framesDelayedRelease: Int = 7
+	var framesBetweenCycles: Int = 30
+	var framesButtonAnimation: Int  = 16
+	var framesBetweenTurns: Int  = 3
 	var framesPlayerWaiting: Int  = 180
-	var framesDelayedRelease: Int = 3
 }

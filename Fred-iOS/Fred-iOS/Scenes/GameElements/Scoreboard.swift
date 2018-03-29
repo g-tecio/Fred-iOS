@@ -69,7 +69,7 @@ struct Scoreboard {
         stateSprint = SKSpriteNode.init(texture: state1Texture)
         stateSprint.zPosition = 2
         stateSprint.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*17/40), y: Int(0))
-        backgroundScoreboardSprite.addChild(stateSprint)
+//        backgroundScoreboardSprite.addChild(stateSprint)
         // Fred Label
         fredLabel = SKLabelNode.init(text: "Fred")
         fredLabel.fontName = "Avenir-Heavy"
@@ -78,7 +78,7 @@ struct Scoreboard {
         fredLabel.fontSize = 24
         fredLabel.zPosition = 4
         fredLabel.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(backgroundScoreboardSprite.size.height*4/20))
-        backgroundScoreboardSprite.addChild(fredLabel)
+//        backgroundScoreboardSprite.addChild(fredLabel)
         // Player Label
         playerLabel = SKLabelNode.init(text: "Player")
         playerLabel.fontName = "Avenir-Heavy"
@@ -87,35 +87,35 @@ struct Scoreboard {
         playerLabel.fontSize = 24
         playerLabel.zPosition = 4
         playerLabel.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*7/20), y: Int(-backgroundScoreboardSprite.size.height*2/20))
-        backgroundScoreboardSprite.addChild(playerLabel)
+//        backgroundScoreboardSprite.addChild(playerLabel)
         // Repeat Symbol
         fredRepeatOn = SKTexture(imageNamed: "RepeatOn")
         fredRepeatOff = SKTexture(imageNamed: "RepeatOff")
         fredRepeat = SKSpriteNode.init(texture: fredRepeatOff)
         fredRepeat.zPosition = 4
         fredRepeat.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*1/50), y: Int(backgroundScoreboardSprite.size.height*11/40))
-        backgroundScoreboardSprite.addChild(fredRepeat)
+//        backgroundScoreboardSprite.addChild(fredRepeat)
         // New Symbol
         fredNewOn = SKTexture(imageNamed: "NewOn")
         fredNewOff = SKTexture(imageNamed: "NewOff")
         fredNew = SKSpriteNode.init(texture: fredNewOff)
         fredNew.zPosition = 4
         fredNew.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*2/40), y: Int(backgroundScoreboardSprite.size.height*11/40))
-        backgroundScoreboardSprite.addChild(fredNew)
+//        backgroundScoreboardSprite.addChild(fredNew)
         // Correct Symbol
         playerCorrectOn = SKTexture.init(imageNamed: "CorrectOn")
         playerCorrectOff = SKTexture.init(imageNamed: "CorrectOff")
         playerCorrect =  SKSpriteNode.init(texture: playerCorrectOff)
         playerCorrect.zPosition = 4
         playerCorrect.position = CGPoint(x: Int(-backgroundScoreboardSprite.size.width*1/50), y: Int(-backgroundScoreboardSprite.size.height*1/40))
-        backgroundScoreboardSprite.addChild(playerCorrect)
+//        backgroundScoreboardSprite.addChild(playerCorrect)
         // Error Symbol
         playerErrorOn = SKTexture.init(imageNamed: "ErrorOn")
         playerErrorOff = SKTexture.init(imageNamed: "ErrorOff")
         playerError = SKSpriteNode.init(texture: playerErrorOff)
         playerError.zPosition = 4
         playerError.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*2/40), y: Int(-backgroundScoreboardSprite.size.height*1/40))
-        backgroundScoreboardSprite.addChild(playerError)
+//        backgroundScoreboardSprite.addChild(playerError)
         // Stars
         starOn = SKTexture.init(imageNamed: "StarOn")
         starOff = SKTexture.init(imageNamed: "StarOff")
@@ -123,14 +123,14 @@ struct Scoreboard {
             let starTemp = SKSpriteNode.init(texture: starOff)
             starTemp.zPosition = 4
             starTemp.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width/17*CGFloat(starNum-6)), y: Int(-backgroundScoreboardSprite.size.height*6/20))
-            backgroundScoreboardSprite.addChild(starTemp)
+//            backgroundScoreboardSprite.addChild(starTemp)
             playerStars.append(starTemp)
         }
         for starNum in 1...5 {
             let starTemp = SKSpriteNode.init(texture: starOff)
             starTemp.zPosition = 4
             starTemp.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width/17*CGFloat(starNum+2)), y: Int(-backgroundScoreboardSprite.size.height*6/20))
-            backgroundScoreboardSprite.addChild(starTemp)
+//            backgroundScoreboardSprite.addChild(starTemp)
             playerStars.append(starTemp)
         }
         // Label StarValue x5
@@ -141,7 +141,7 @@ struct Scoreboard {
         starValue.fontSize = 18
         starValue.zPosition = 5
         starValue.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*1/40), y: Int(-backgroundScoreboardSprite.size.height*19/50))
-        backgroundScoreboardSprite.addChild(starValue)
+//        backgroundScoreboardSprite.addChild(starValue)
         // Fred Counter
         fredCount = SKLabelNode.init(text: "0")
         fredCount.fontName = "Avenir-Heavy"
@@ -150,7 +150,7 @@ struct Scoreboard {
         fredCount.fontSize = 24
         fredCount.zPosition = 4
         fredCount.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*6/40), y: Int(backgroundScoreboardSprite.size.height*4/20))
-        backgroundScoreboardSprite.addChild(fredCount)
+//        backgroundScoreboardSprite.addChild(fredCount)
         // Player Counter
         playerCount = SKLabelNode.init(text: "0")
         playerCount.fontName = "Avenir-Heavy"
@@ -159,7 +159,7 @@ struct Scoreboard {
         playerCount.fontSize = 24
         playerCount.zPosition = 4
         playerCount.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*6/40), y: Int(-backgroundScoreboardSprite.size.height*2/20))
-        backgroundScoreboardSprite.addChild(playerCount)
+//        backgroundScoreboardSprite.addChild(playerCount)
         // Score Title
         scoreTitle = SKLabelNode.init(text: "Score")
         scoreTitle.fontName = "Avenir"
@@ -168,15 +168,18 @@ struct Scoreboard {
         scoreTitle.fontSize = 20
         scoreTitle.zPosition = 4
         scoreTitle.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*14/40), y: Int(backgroundScoreboardSprite.size.height*6/20))
-        backgroundScoreboardSprite.addChild(scoreTitle)
+//        backgroundScoreboardSprite.addChild(scoreTitle)
         // Score
         score = SKLabelNode.init(text: "0")
         score.fontName = "Avenir-Heavy"
         score.horizontalAlignmentMode = .center
-        score.fontColor = .lightGray
+        score.fontColor = .white
         score.fontSize = 46
         score.zPosition = 4
-        score.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*14/40), y: Int(-backgroundScoreboardSprite.size.height*2/20))
-        backgroundScoreboardSprite.addChild(score)
+//        score.position = CGPoint(x: Int(backgroundScoreboardSprite.size.width*14/40), y: Int(-backgroundScoreboardSprite.size.height*2/20))
+		score.position = CGPoint(x: inThisScene.size.width/2, y: (inThisScene.size.height*18/20))
+		
+//        backgroundScoreboardSprite.addChild(score)
+//		inThisScene.addChild(score)
     }
 }

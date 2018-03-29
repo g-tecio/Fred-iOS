@@ -135,7 +135,8 @@ class GameScene: SKScene {
 				self.addChild( fredButtons[button-1].buttonSprite )
 			}
 			/// Present Scoreboard, GameControls and GameOverMessage
-			self.addChild(scoreboard.backgroundScoreboardSprite)
+//			self.addChild(scoreboard.backgroundScoreboardSprite)
+			self.addChild(scoreboard.score)
 			self.addChild(gameControls.startButtonSprite)
 			self.addChild(gameControls.configButtonSprite)
 			self.addChild(gameOverMessage.gameOverLabel)

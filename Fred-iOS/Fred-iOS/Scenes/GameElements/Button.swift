@@ -9,18 +9,18 @@
 import AVFoundation
 import SpriteKit
 
-let dictionaryButtonValues =   [01: (color: "Brown",       note: 261.63, xPos: 1, yPos: 4),
-                                02: (color: "DarkBlue",    note: 293.66, xPos: 2, yPos: 4),
-                                03: (color: "DarkGreen",   note: 329.63, xPos: 3, yPos: 4),
-                                04: (color: "DarkPurple",  note: 349.23, xPos: 1, yPos: 3),
-                                05: (color: "DarkRed",     note: 392.00, xPos: 2, yPos: 3),
-                                06: (color: "LightBlue",   note: 440.00, xPos: 3, yPos: 3),
-                                07: (color: "LightGreen",  note: 493.88, xPos: 1, yPos: 2),
-                                08: (color: "LightPurple", note: 523.25, xPos: 2, yPos: 2),
-                                09: (color: "LightRed",    note: 587.33, xPos: 3, yPos: 2),
-                                10: (color: "Orange",      note: 659.25, xPos: 1, yPos: 1),
-                                11: (color: "Pink",        note: 698.46, xPos: 2, yPos: 1),
-                                12: (color: "Yellow",      note: 783.99, xPos: 3, yPos: 1)]
+let dictionaryButtonValues =   [01: (color: "LightRed",       note: 261.63, xPos: 1, yPos: 4),
+                                02: (color: "Pink",    note: 293.66, xPos: 2, yPos: 4),
+                                03: (color: "LightGreen",   note: 329.63, xPos: 3, yPos: 4),
+                                04: (color: "LightYellow",      note: 349.23, xPos: 1, yPos: 3),
+                                05: (color: "LightBlue",     note: 392.00, xPos: 2, yPos: 3),
+                                06: (color: "Orange",   note: 440.00, xPos: 3, yPos: 3),
+                                07: (color: "DarkGreen",  note: 493.88, xPos: 1, yPos: 2),
+                                08: (color: "Rose", note: 523.25, xPos: 2, yPos: 2),
+                                09: (color: "Olive",    note: 587.33, xPos: 3, yPos: 2),
+                                10: (color: "BlueGray",      note: 659.25, xPos: 1, yPos: 1),
+                                11: (color: "DarkGreen",        note: 698.46, xPos: 2, yPos: 1),
+                                12: (color: "DarkBlue", note: 783.99, xPos: 3, yPos: 1)]
 
 // Button Struct - Where magic happens!
 struct Button {
@@ -77,12 +77,12 @@ struct Button {
 		
 		/// Assign textures to buttonSprite
 		normalTexture = SKTexture(imageNamed: color + "N")
-		lightedTexture = SKTexture(imageNamed: color + "H")
+		lightedTexture = SKTexture(imageNamed: color + "L")
 		buttonSprite = SKSpriteNode.init(texture: normalTexture)
 		
 		/// Calculates the position in the screen based on x and y location
 		let tempX: Int = ((((xPos*2)-1)*Int(inThisScene.size.width*0.96/6))+Int(inThisScene.size.width*0.02))
-		let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/11))
+		let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/10))
 		buttonSprite.position = CGPoint(x: tempX, y: tempY )
 		
 		/// Resizing depending to screen size
