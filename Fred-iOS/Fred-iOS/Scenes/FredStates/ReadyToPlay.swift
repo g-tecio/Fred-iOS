@@ -23,6 +23,7 @@ class ReadyToPlay: FredGameState {
         /// Enable Start Button
         game.gameControls.startButtonSprite.texture = game.gameControls.startOnTexture
         game.gameControls.startLabel.text = "Press to Play"
+		
     }
     
     override func willExit(to nextState: GKState) {
@@ -48,10 +49,11 @@ class ReadyToPlay: FredGameState {
         game.scoreboard.playerCount.text = "0"
         game.scoreboard.playerCount.fontColor = .darkGray
         game.scoreboard.score.text = "0"
-        game.scoreboard.score.fontColor = .black
+        game.scoreboard.score.fontColor = .white
         for i in 1...10 {
             game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
         }
+		game.gameControls.configButtonSprite.removeFromParent()
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

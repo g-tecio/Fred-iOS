@@ -35,6 +35,8 @@
 		CB908504204F42FE00CA0E57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB908503204F42FE00CA0E57 /* Assets.xcassets */; };
 		CB908507204F42FE00CA0E57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB908505204F42FE00CA0E57 /* LaunchScreen.storyboard */; };
 		CB90850F204F4C3C00CA0E57 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90850E204F4C3C00CA0E57 /* Button.swift */; };
+		CBD380EB206DFF0900FAD0D4 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD380E9206DFF0900FAD0D4 /* bokeh.png */; };
+		CBD380EC206DFF0900FAD0D4 /* SceneKit Particle System.scnp in Resources */ = {isa = PBXBuildFile; fileRef = CBD380EA206DFF0900FAD0D4 /* SceneKit Particle System.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		CB908506204F42FE00CA0E57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB908508204F42FE00CA0E57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB90850E204F4C3C00CA0E57 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		CBD380E9206DFF0900FAD0D4 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		CBD380EA206DFF0900FAD0D4 /* SceneKit Particle System.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "SceneKit Particle System.scnp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 				CB1A10AC2057995900AB0F82 /* Scoreboard.swift */,
 				CB7F67F8206092F100C4C314 /* GameControls.swift */,
 				CB779077205A537C004A3213 /* GameOverMessage.swift */,
+				CBD380E9206DFF0900FAD0D4 /* bokeh.png */,
+				CBD380EA206DFF0900FAD0D4 /* SceneKit Particle System.scnp */,
 			);
 			path = GameElements;
 			sourceTree = "<group>";
@@ -234,7 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB908502204F42FE00CA0E57 /* Main.storyboard in Resources */,
+				CBD380EB206DFF0900FAD0D4 /* bokeh.png in Resources */,
 				CB908504204F42FE00CA0E57 /* Assets.xcassets in Resources */,
+				CBD380EC206DFF0900FAD0D4 /* SceneKit Particle System.scnp in Resources */,
 				CB908507204F42FE00CA0E57 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

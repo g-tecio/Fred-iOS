@@ -41,6 +41,8 @@ class GameScene: SKScene {
 		/// GameViewControl setup as reference to handle SceneStates
 		var gameViewController: GameViewController
 	
+		/// Effect
+//		var touchEffect: SKEmitterNode!
 	
 	// MARK: Game Initializer
 	
@@ -60,6 +62,8 @@ class GameScene: SKScene {
 			scoreboard = Scoreboard.init(inThisScene: self)
 			gameControls = GameControls.init(inThisScene: self)
 			gameOverMessage = GameOverMessage.init(inThisScene: self)
+			
+			
 			
 			/// Creates FredGameStateMachineand with States
 			fredGameStateMachine = GKStateMachine(states: [ ReadyToPlay(game: self),

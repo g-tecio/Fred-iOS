@@ -31,6 +31,9 @@ class GameOver: FredGameState {
         
         // Remove Game Over Message
         game.gameOverMessage.gameOverLabel.isHidden = true
+		
+		/// Button Configuration
+		game.addChild(game.gameControls.configButtonSprite)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
