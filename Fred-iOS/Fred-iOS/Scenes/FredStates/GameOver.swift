@@ -34,6 +34,9 @@ class GameOver: FredGameState {
 		
 		/// Button Configuration
 		game.addChild(game.gameControls.configButtonSprite)
+		
+		/// Activate Effect
+		game.lastPosition.x = -100
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

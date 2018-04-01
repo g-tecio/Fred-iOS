@@ -42,7 +42,11 @@ class GameScene: SKScene {
 		var gameViewController: GameViewController
 	
 		/// Effect
-//		var touchEffect: SKEmitterNode!
+		var traceEffect: SKEmitterNode!
+		var spinnyNode : SKShapeNode!
+		var movingNode : SKShapeNode!
+		var lastPosition: CGPoint = CGPoint.init(x: -100, y: 0)
+		var newPosition: CGPoint = CGPoint.init(x: 0, y: 0)
 	
 	// MARK: Game Initializer
 	
@@ -63,7 +67,32 @@ class GameScene: SKScene {
 			gameControls = GameControls.init(inThisScene: self)
 			gameOverMessage = GameOverMessage.init(inThisScene: self)
 			
+			/// Trace and touch effects
+			traceEffect = SKEmitterNode.init(fileNamed: "Trace.sks")
+			traceEffect.targetNode = self
+			traceEffect.name = "TouchEffectNode"
 			
+			let w = (self.size.width + self.size.height) * 0.03
+			
+			self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.2)
+			if let spinnyNode = self.spinnyNode {
+				spinnyNode.lineWidth = 2.5
+				spinnyNode.name =  "TouchEffectNode"
+				spinnyNode.zPosition = 20
+				spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.3)))
+			}
+			
+			self.movingNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.2)
+			if let movingNode = self.movingNode {
+				movingNode.lineWidth = 2.5
+				movingNode.name =  "TouchEffectNode"
+				movingNode.addChild(traceEffect)
+				movingNode.zPosition = 21
+//				movingNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.25)))
+//				movingNode.run(SKAction.sequence([ 	SKAction.wait(forDuration: 0.5),
+//													   SKAction.fadeOut(withDuration: 0.3),
+//													   SKAction.removeFromParent()]))
+			}
 			
 			/// Creates FredGameStateMachineand with States
 			fredGameStateMachine = GKStateMachine(states: [ ReadyToPlay(game: self),
@@ -107,23 +136,47 @@ class GameScene: SKScene {
 			}
 			
 			if !isAButtonPlaying {
+				/// ButtonAction
 				isAButtonPlaying = true
 				fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].pressButtonAction )
+				/// Effect
+				newPosition = fredButtons[idButtonPlaying-1].buttonSprite.position
+				if lastPosition.x != CGFloat(-100) {
+					if let m = self.movingNode?.copy() as! SKShapeNode? {
+						m.position = lastPosition
+						m.strokeColor = SKColor.blue
+						self.addChild(m)
+						m.run(SKAction.move(to: newPosition, duration: 0.3))
+					}
+				}
+//				if let s = self.spinnyNode?.copy() as! SKShapeNode? {
+//					s.position = newPosition
+//					s.strokeColor = SKColor.red
+//					self.addChild(s)
+//				}
 			}
 		}
 	
 		/// Delayed Release Button
-	func delayedReleaseButtonFunction(delayed: Bool) {
+		func delayedReleaseButtonFunction(delayed: Bool) {
 			
 			for n in 1...12 {
 				if fredButtons[n-1].buttonSprite.hasActions() {
 					fredButtons[n-1].buttonSprite.removeAllActions()
 				}
 				if (idButtonPlaying == n && delayed && GameData.shared.framesDelayedRelease > 0) {
+					/// ButtonAction
 					fredButtons[n-1].buttonSprite.run( SKAction.sequence([SKAction.wait(forDuration: Double(GameData.shared.framesDelayedRelease)/60.0), fredButtons[n-1].immediateReleaseButtonAction]))
 				}
 				else {
-						fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
+					fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
+				}
+				/// Effect
+				lastPosition = newPosition
+				for node in self.children {
+					if node.name == "TouchEffectNode" {
+						node.run(SKAction.sequence([ SKAction.fadeOut(withDuration: 0.2), SKAction.removeFromParent()]))
+					}
 				}
 			}
 			self.isAButtonPlaying = false

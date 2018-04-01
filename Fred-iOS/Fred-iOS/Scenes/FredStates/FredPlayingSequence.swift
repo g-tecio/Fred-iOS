@@ -46,7 +46,10 @@ class FredPlayingSequence: FredGameState {
         }
         if nextState is PlayerPlayingSequence {
             
-            /// Set Game Variables
+			/// Remove Effect
+			game.lastPosition.x = -100
+			
+			/// Set Game Variables
             game.sequenceCounter = 0
             
             /// Set Sprites

@@ -20,9 +20,12 @@ class FredAddsRandomButton: FredGameState {
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
-        
-        /// State
+		
+		/// State
         game.scoreboard.stateSprint.texture = game.scoreboard.state2Texture
+		
+		/// Remove Effect
+		game.lastPosition.x = -100
         
         /// New Value added to end of sequence
         game.sequenceList.append(game.newValue.nextInt())

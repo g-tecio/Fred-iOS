@@ -19,7 +19,7 @@ class ReadyToPlay: FredGameState {
         super.didEnter(from: previousState)
         // State
         game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
-        
+		
         /// Enable Start Button
         game.gameControls.startButtonSprite.texture = game.gameControls.startOnTexture
         game.gameControls.startLabel.text = "Press to Play"
@@ -54,6 +54,9 @@ class ReadyToPlay: FredGameState {
             game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
         }
 		game.gameControls.configButtonSprite.removeFromParent()
+		
+		/// Remove Effect
+		game.lastPosition.x = -100
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
