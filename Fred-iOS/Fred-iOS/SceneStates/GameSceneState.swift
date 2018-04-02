@@ -20,7 +20,7 @@ class GameSceneState: SceneState {
 			super.init(referenceGVC: referenceGVC, sceneStateName: "GameSceneState")
 		}
 	
-	// MARK: Overrride Methos
+	// MARK: Overrride Methods
 	
 		override func didEnter(from previousState: GKState?) {
 			super.didEnter(from: previousState)
@@ -36,7 +36,12 @@ class GameSceneState: SceneState {
 		}
 	
 		override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-			return stateClass is ConfigSceneState.Type
+			if (stateClass is ConfigSceneState.Type) || (stateClass is ScoresSceneState.Type) {
+				return true
+			}
+			else {
+				return false
+			}
 		}
-
+	
 }

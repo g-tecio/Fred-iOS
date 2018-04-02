@@ -22,7 +22,7 @@ class FredReleaseButton: FredGameState {
         super.didEnter(from: previousState)
         
         /// Start immediate button release action 
-		game.delayedReleaseButtonFunction(delayed: false)
+		game.delayedReleaseButtonFunction(delayed: false, clear: false)
         pauseTimeCounter = 0
     }
     

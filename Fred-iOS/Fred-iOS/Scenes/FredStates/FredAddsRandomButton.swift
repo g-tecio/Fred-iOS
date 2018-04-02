@@ -24,13 +24,13 @@ class FredAddsRandomButton: FredGameState {
 		/// State
         game.scoreboard.stateSprint.texture = game.scoreboard.state2Texture
 		
-		/// Remove Effect
-		game.lastPosition.x = -100
-        
-        /// New Value added to end of sequence
+		/// New Value added to end of sequence
         game.sequenceList.append(game.newValue.nextInt())
+		
+		/// Set Last Postiton for TraceEffect
+		game.lastPosition = game.fredButtons[game.sequenceList[0]-1].buttonSprite.position
         
-        /// Start timer
+		/// Start timer
         pauseTimeCounter = 0
     }
     

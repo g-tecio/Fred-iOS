@@ -29,8 +29,11 @@ struct Button {
     let buttonSprite: SKSpriteNode
     let normalTexture: SKTexture
     let lightedTexture: SKTexture
+	let whiteOnTexture: SKTexture
+	let whiteOffTexture: SKTexture
     var pressButtonAction: SKAction = SKAction.init()
 	var immediateReleaseButtonAction: SKAction = SKAction.init()
+	var clearOnReleaseButtonAction: SKAction = SKAction.init()
 	
 	/// Feedback
 	var feedbackGenerator : UIImpactFeedbackGenerator
@@ -81,11 +84,13 @@ struct Button {
 		/// Assign textures to buttonSprite
 		normalTexture = SKTexture(imageNamed: color + "N")
 		lightedTexture = SKTexture(imageNamed: color + "L")
-		buttonSprite = SKSpriteNode.init(texture: normalTexture)
+		whiteOffTexture = SKTexture(imageNamed: "WhiteN")
+		whiteOnTexture = SKTexture(imageNamed: "WhiteL")
+		buttonSprite = SKSpriteNode.init(texture: whiteOffTexture)
 		
 		/// Calculates the position in the screen based on x and y location
-		let tempX: Int = ((((xPos*2)-1)*Int(inThisScene.size.width*0.96/6))+Int(inThisScene.size.width*0.02))
-		let tempY: Int = (((yPos*2))*Int((inThisScene.size.height)/10))
+		let tempX: Int = ((((xPos*2)-1)*Int(inThisScene.size.width*0.97/6))+Int(inThisScene.size.width*0.015))
+		let tempY: Int = (((yPos*2)*Int((inThisScene.size.height)/11))+Int(inThisScene.size.width*0.08))
 		buttonSprite.position = CGPoint(x: tempX, y: tempY )
 		
 		/// Resizing depending to screen size
@@ -101,10 +106,11 @@ struct Button {
 		/// Actions creator
 		pressButtonAction = pressActionCreator(thisButton: self)
 		immediateReleaseButtonAction = immediateReleaseActionCreator(thisButton: self)
+		clearOnReleaseButtonAction = clearOnReleaseButtonActionCreator(thisButton: self)
     }
 	
 	/// ButtonPressed Action
-    func pressActionCreator(thisButton: Button) -> SKAction{
+    func pressActionCreator(thisButton: Button) -> SKAction {
 		
 		/// Action to turn on light in button
 		let lightButtonAction = SKAction.animate(with: [lightedTexture], timePerFrame: 0.0)
@@ -122,7 +128,7 @@ struct Button {
     }
 	
 	// Immediate ButtonReleased Action
-	func immediateReleaseActionCreator(thisButton: Button) -> SKAction{
+	func immediateReleaseActionCreator(thisButton: Button) -> SKAction {
 		
 		/// Action to turn off light in button
 		let normalButtonAction = SKAction.animate(with: [normalTexture], timePerFrame: 0.0)
@@ -137,4 +143,21 @@ struct Button {
 		/// Return action for Release
 		return SKAction.group( [soundEndAction, normalButtonAction] )
 	}
+	
+	func clearOnReleaseButtonActionCreator(thisButton: Button) -> SKAction {
+		
+		/// Action to turn off light in button
+		let clearButtonAction = SKAction.animate(with: [whiteOffTexture], timePerFrame: 0.0)
+		
+		/// Action to end Sound
+		let soundEndAction = SKAction.run {
+			if thisButton.audioTonePlayerNode.isPlaying {
+				thisButton.audioTonePlayerNode.pause()
+			}
+		}
+		
+		/// Return action for Release
+		return SKAction.group( [soundEndAction, clearButtonAction] )
+	}
+	
 }

@@ -33,7 +33,7 @@ class WaitingForPlayer: FredGameState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is PlayerPressButton.Type, is GameOver.Type:
+        case is PlayerPressButton.Type, is PlayerError.Type:
             return true
         default:
             return false
@@ -46,7 +46,7 @@ class WaitingForPlayer: FredGameState {
         
         /// If an interval of pauseInterval has passed since the previous update GameOver
         if pauseTimeCounter > Double(GameData.shared.framesPlayerWaiting)/60.0 {
-            game.fredGameStateMachine.enter(GameOver.self)
+            game.fredGameStateMachine.enter(PlayerError.self)
         }
     }
 }

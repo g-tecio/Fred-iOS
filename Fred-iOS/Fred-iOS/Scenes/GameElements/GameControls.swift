@@ -7,59 +7,109 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 struct GameControls {
 	
-	/// Start Game Button and Label
-	let startButtonSprite:SKSpriteNode
-	let startOnTexture: SKTexture
-	let startOffTexture: SKTexture
-	let startLabel: SKLabelNode
+	/// Start Switch
+	var startSwitch: SwitchSK!
+	
+	/// Error
+	var playErrorSoundAction: SKAction = SKAction.init()
 
 	/// Configuration Button
-	let configButtonSprite:SKSpriteNode
+	let configButtonSprite: SKSpriteNode
+	let scoreButtonSprite: SKSpriteNode
+	let errorSprite: SKSpriteNode
+	let errorOnTexture: SKTexture
+	let errorOffTexture: SKTexture
 	
+	/// Sound for button
+	let audioTonePlayerNode: AVAudioPlayerNode = AVAudioPlayerNode.init()
+	let bufferCapacity: AVAudioFrameCount = 512
+	let bufferWithTone: AVAudioPCMBuffer!
+	let amplitud = 0.12
+	let note: Double = 140.00
 	
+	/// Feedback
+	var feedbackGenerator : UIImpactFeedbackGenerator
+	
+	/// Initialization
 	init(inThisScene: GameScene) {
-		/// Start Game Button
-		startOnTexture = SKTexture(imageNamed: "StartOn")
-		startOffTexture = SKTexture(imageNamed: "StartOff")
-		startButtonSprite = SKSpriteNode.init(texture: startOnTexture)
-		startButtonSprite.name = "startButton"
-		startButtonSprite.zPosition = 1
-		startButtonSprite.position = CGPoint(x: inThisScene.size.width/2, y: (inThisScene.size.height*1/13)-15)
 		
-		/// Resizing depending to screen size
-		let resizeFactorX:CGFloat = inThisScene.size.width/380.0
-		let resizeFactorY:CGFloat = inThisScene.size.height/850.0
-		let originalSize = startButtonSprite.size
-		startButtonSprite.size = CGSize(width: originalSize.width*resizeFactorX, height: originalSize.height*resizeFactorY)
+		/// Create Tone and load into Buffer
+		var theta: Double = 0
+		let theta_increment = 2.0 * Double.pi * note / 44100.0
+		bufferWithTone = AVAudioPCMBuffer(pcmFormat: AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2)!, frameCapacity: bufferCapacity)
+		var frame: UInt32 = 0
+		while ( theta < (2.0 * Double.pi) ) {
+			bufferWithTone.floatChannelData![0][Int(frame)] = Float32(sin(theta) > 0 ? amplitud : -amplitud)
+			bufferWithTone.floatChannelData![1][Int(frame)] = Float32(sin(theta) > 0 ? amplitud : -amplitud)
+			theta += theta_increment
+			frame += 1
+		}
+		bufferWithTone.frameLength = frame
 		
-		/// Add Button to Scene
-		//inThisScene.addChild(startButtonSprite)
+		/// Set up Tone PlayerNode
+		inThisScene.audioEngine.attach(audioTonePlayerNode)
+		inThisScene.audioEngine.connect(audioTonePlayerNode,
+										to: inThisScene.audioEngine.mainMixerNode,
+										format: AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2))
+		audioTonePlayerNode.scheduleBuffer(bufferWithTone, at: nil, options: .loops, completionHandler: { })
 		
-		/// Start Game label
-		startLabel = SKLabelNode.init(text: "Loading...")
-		startLabel.name = "startLabel"
-		startLabel.fontName = "Avenir-Heavy"
-		startLabel.horizontalAlignmentMode = .center
-		startLabel.verticalAlignmentMode = .center
-		startLabel.fontColor = .white
-		startLabel.fontSize = 24
-		startLabel.zPosition = 2
-		startLabel.position = CGPoint(x: 0, y: 0)
-		
-		/// Add Label to Scene
-		startButtonSprite.addChild(startLabel)
+		/// Start Switch
+		startSwitch = SwitchSK.init(inThisScene: inThisScene, initialValue: false)
+		startSwitch.name = "Start Switch"
+		startSwitch.position = CGPoint(x: inThisScene.size.width/2, y: (inThisScene.size.height*55/60))
+		startSwitch.zPosition = 3
 		
 		/// Configuration Button
-		configButtonSprite = SKSpriteNode.init(imageNamed: "cogButtonBlack")
+		configButtonSprite = SKSpriteNode.init(imageNamed: "ConfigScene")
+		configButtonSprite.name = "Config Button"
+		configButtonSprite.position = CGPoint(x: inThisScene.size.width*6/50, y: (inThisScene.size.height*55/60))
 		configButtonSprite.zPosition = 3
-		configButtonSprite.position = CGPoint(x: inThisScene.size.width*45/50, y: (inThisScene.size.height*1/13)-15)
-		
-		/// Add Label to Scene
-		//inThisScene.addChild(configButtonSprite)
-		
-	}
 
+		/// HighScore Button
+		scoreButtonSprite = SKSpriteNode.init(imageNamed: "ScoresScene")
+		scoreButtonSprite.name = "Score Button"
+		scoreButtonSprite.position = CGPoint(x: inThisScene.size.width*44/50, y: (inThisScene.size.height*55/60))
+		configButtonSprite.zPosition = 3
+		
+		/// Feedback
+		feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+		feedbackGenerator.prepare()
+		
+		/// Error
+		errorOnTexture = SKTexture.init(imageNamed: "ErrorOn")
+		errorOffTexture = SKTexture.init(imageNamed: "ErrorOff")
+		errorSprite = SKSpriteNode.init(texture: errorOffTexture)
+		errorSprite.position = CGPoint(x: 10, y: 10)
+		
+		// Error Sound
+		playErrorSoundAction = playErrorSoundCreator(thisControl: self)
+	}
+	
+	func playErrorSoundCreator(thisControl: GameControls) ->SKAction {
+		
+		/// Action to turn on light in button
+		let errorOnSpriteAction = SKAction.animate(with: [errorOnTexture], timePerFrame: 0.0)
+		let errorOffSpriteAction = SKAction.animate(with: [errorOffTexture], timePerFrame: 0.0)
+		
+		let soundStartAction = SKAction.run {
+			if !thisControl.audioTonePlayerNode.isPlaying {
+				thisControl.audioTonePlayerNode.play()
+				thisControl.feedbackGenerator.impactOccurred()
+			}
+		}
+		
+		/// Action to end Sound
+		let soundEndAction = SKAction.run {
+			if thisControl.audioTonePlayerNode.isPlaying {
+				thisControl.audioTonePlayerNode.pause()
+			}
+		}
+		
+		/// Return action for Release
+		return SKAction.sequence( [errorOnSpriteAction, soundStartAction, SKAction.wait(forDuration: 1), soundEndAction, errorOffSpriteAction] )
+	}
 }

@@ -34,6 +34,9 @@ class GameOver: FredGameState {
 		
 		/// Button Configuration
 		game.addChild(game.gameControls.configButtonSprite)
+		game.addChild(game.gameControls.scoreButtonSprite)
+		game.gameControls.startSwitch.addChild(game.gameControls.startSwitch.switchBar)
+		game.gameControls.startSwitch.labelInsideSwitchSK.text = ""
 		
 		/// Activate Effect
 		game.lastPosition.x = -100

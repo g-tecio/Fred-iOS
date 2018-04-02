@@ -28,7 +28,7 @@ class FredPressButton: FredGameState {
         pauseTimeCounter = 0
         
         /// Button Press Action Starts
-        game.pressButtonFunction(buttonId: game.idButtonPlaying)
+		game.pressButtonFunction(buttonId: game.idButtonPlaying, multiple: false)
     }
     
     override func willExit(to nextState: GKState) {

@@ -20,21 +20,26 @@ class GameViewController: UIViewController {
 		/// Scenes
 		var gameScene: GameScene!
 		var configScene: ConfigScene!
+		var scoresScene: ScoresScene!
 	
 	// MARK: Override Methods
 	
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
-			/// GameScene Setup - with Code
+			/// GameScene Setup
 			gameScene = GameScene.init(sceneSize: view.bounds.size, referenceGVC: self)
 
-			/// ConfigScene Setup - with Code
+			/// ConfigScene Setup
 			configScene = ConfigScene.init(sceneSize: view.bounds.size, referenceGVC: self)
+			
+			/// ScoresScene Setup
+			scoresScene = ScoresScene.init(sceneSize: view.bounds.size, referenceGVC: self)
 			
 			/// Creates SceneStateMachine and adds states, then enters GameSceneState
 			sceneStateMachine = GKStateMachine(states: [	GameSceneState(referenceGVC: self),
-															ConfigSceneState(referenceGVC: self) ] )
+															ConfigSceneState(referenceGVC: self),
+															ScoresSceneState(referenceGVC: self)	] )
 			sceneStateMachine.enter(GameSceneState.self)
 		}
 	

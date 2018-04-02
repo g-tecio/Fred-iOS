@@ -19,10 +19,11 @@ class PlayerPressButton: FredGameState {
         super.didEnter(from: previousState)
         
         /// Start Play of Button
-        game.pressButtonFunction(buttonId: game.idButtonPlaying)
+		game.pressButtonFunction(buttonId: game.idButtonPlaying, multiple: false)
         /// If button is correct set playerCorrectOn
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
             game.score += 1
+			game.gameControls.startSwitch.labelInsideSwitchSK.text = "\(game.score)"
             game.scoreboard.score.text = "\(game.score)"
             game.scoreboard.playerCount.text = "\(game.sequenceCounter+1)"
             game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOn

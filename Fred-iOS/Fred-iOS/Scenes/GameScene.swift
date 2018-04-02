@@ -43,8 +43,7 @@ class GameScene: SKScene {
 	
 		/// Effect
 		var traceEffect: SKEmitterNode!
-		var spinnyNode : SKShapeNode!
-		var movingNode : SKShapeNode!
+		var movingNode : SKNode!
 		var lastPosition: CGPoint = CGPoint.init(x: -100, y: 0)
 		var newPosition: CGPoint = CGPoint.init(x: 0, y: 0)
 	
@@ -72,30 +71,16 @@ class GameScene: SKScene {
 			traceEffect.targetNode = self
 			traceEffect.name = "TouchEffectNode"
 			
-			let w = (self.size.width + self.size.height) * 0.03
-			
-			self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.2)
-			if let spinnyNode = self.spinnyNode {
-				spinnyNode.lineWidth = 2.5
-				spinnyNode.name =  "TouchEffectNode"
-				spinnyNode.zPosition = 20
-				spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.3)))
-			}
-			
-			self.movingNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.2)
+			self.movingNode = SKNode.init()
 			if let movingNode = self.movingNode {
-				movingNode.lineWidth = 2.5
 				movingNode.name =  "TouchEffectNode"
 				movingNode.addChild(traceEffect)
 				movingNode.zPosition = 21
-//				movingNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.25)))
-//				movingNode.run(SKAction.sequence([ 	SKAction.wait(forDuration: 0.5),
-//													   SKAction.fadeOut(withDuration: 0.3),
-//													   SKAction.removeFromParent()]))
 			}
 			
 			/// Creates FredGameStateMachineand with States
 			fredGameStateMachine = GKStateMachine(states: [ ReadyToPlay(game: self),
+															StartGame(game: self),
 															FredAddsRandomButton(game: self),
 															FredPlayingSequence(game: self),
 															FredPressButton(game: self),
@@ -104,6 +89,7 @@ class GameScene: SKScene {
 															WaitingForPlayer(game: self),
 															PlayerPressButton(game: self),
 															PlayerReleaseButton(game: self),
+															PlayerError(game: self),
 															GameOver(game: self) ] )
 			fredGameStateMachine.enter(ReadyToPlay.self)
 			
@@ -126,8 +112,12 @@ class GameScene: SKScene {
 	
 	// MARK: Custom Methods
 	
+	func playErrorFunction() {
+		gameControls.errorSprite.run( gameControls.playErrorSoundAction )
+	}
+	
 		/// Press Button
-		func pressButtonFunction(buttonId: Int) {
+		func pressButtonFunction(buttonId: Int, multiple: Bool) {
 			
 			idButtonPlaying = buttonId
 			
@@ -135,41 +125,40 @@ class GameScene: SKScene {
 				fredButtons[idButtonPlaying-1].buttonSprite.removeAllActions()
 			}
 			
-			if !isAButtonPlaying {
+			if !isAButtonPlaying || multiple {
 				/// ButtonAction
 				isAButtonPlaying = true
 				fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].pressButtonAction )
 				/// Effect
 				newPosition = fredButtons[idButtonPlaying-1].buttonSprite.position
 				if lastPosition.x != CGFloat(-100) {
-					if let m = self.movingNode?.copy() as! SKShapeNode? {
+					if let m = self.movingNode?.copy() as! SKNode? {
 						m.position = lastPosition
-						m.strokeColor = SKColor.blue
 						self.addChild(m)
 						m.run(SKAction.move(to: newPosition, duration: 0.3))
 					}
 				}
-//				if let s = self.spinnyNode?.copy() as! SKShapeNode? {
-//					s.position = newPosition
-//					s.strokeColor = SKColor.red
-//					self.addChild(s)
-//				}
 			}
 		}
 	
 		/// Delayed Release Button
-		func delayedReleaseButtonFunction(delayed: Bool) {
+	func delayedReleaseButtonFunction(delayed: Bool, clear: Bool) {
 			
-			for n in 1...12 {
-				if fredButtons[n-1].buttonSprite.hasActions() {
-					fredButtons[n-1].buttonSprite.removeAllActions()
-				}
-				if (idButtonPlaying == n && delayed && GameData.shared.framesDelayedRelease > 0) {
+//			for n in 1...12 {
+//				if fredButtons[n-1].buttonSprite.hasActions() {
+//					fredButtons[n-1].buttonSprite.removeAllActions()
+//				}
+				if (delayed && GameData.shared.framesDelayedRelease > 0) {
 					/// ButtonAction
-					fredButtons[n-1].buttonSprite.run( SKAction.sequence([SKAction.wait(forDuration: Double(GameData.shared.framesDelayedRelease)/60.0), fredButtons[n-1].immediateReleaseButtonAction]))
+					fredButtons[idButtonPlaying-1].buttonSprite.run( SKAction.sequence([SKAction.wait(forDuration: Double(GameData.shared.framesDelayedRelease)/60.0), fredButtons[idButtonPlaying-1].immediateReleaseButtonAction]))
 				}
 				else {
-					fredButtons[n-1].buttonSprite.run( fredButtons[n-1].immediateReleaseButtonAction )
+					if !clear {
+						fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].immediateReleaseButtonAction )
+					}
+					else {
+						fredButtons[idButtonPlaying-1].buttonSprite.run( fredButtons[idButtonPlaying-1].clearOnReleaseButtonAction )
+					}
 				}
 				/// Effect
 				lastPosition = newPosition
@@ -178,7 +167,7 @@ class GameScene: SKScene {
 						node.run(SKAction.sequence([ SKAction.fadeOut(withDuration: 0.2), SKAction.removeFromParent()]))
 					}
 				}
-			}
+//			}
 			self.isAButtonPlaying = false
 		}
 	
@@ -192,10 +181,11 @@ class GameScene: SKScene {
 				self.addChild( fredButtons[button-1].buttonSprite )
 			}
 			/// Present Scoreboard, GameControls and GameOverMessage
-//			self.addChild(scoreboard.backgroundScoreboardSprite)
-			self.addChild(scoreboard.score)
-			self.addChild(gameControls.startButtonSprite)
+//			self.addChild(scoreboard.score)
+			self.addChild(gameControls.startSwitch)
 			self.addChild(gameControls.configButtonSprite)
+			self.addChild(gameControls.scoreButtonSprite)
+			self.addChild(gameControls.errorSprite)
 			self.addChild(gameOverMessage.gameOverLabel)
 		}
 	
@@ -223,6 +213,7 @@ class GameScene: SKScene {
 
 		/// Touch Down
 		override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+						
 			for touch in touches {
 				let location = touch.location(in: self)
 				let item = atPoint(location)
@@ -230,8 +221,8 @@ class GameScene: SKScene {
 				/// Start Play or Config Scene or Play Button
 				if (fredGameStateMachine.currentState is ReadyToPlay) {
 					/// Start Game
-					if (gameControls.startButtonSprite === item) || (gameControls.startLabel === item){
-						fredGameStateMachine.enter(FredAddsRandomButton.self)
+					if gameControls.startSwitch.switchBar === item {
+						gameControls.startSwitch.beingSet = true
 					}
 					else {
 						/// Config Scene
@@ -239,12 +230,18 @@ class GameScene: SKScene {
 							gameViewController.sceneStateMachine.enter(ConfigSceneState.self)
 						}
 						else {
-							/// Play buttons when ReadyToPlay state, no effect on Game
-							for n in 1...12 {
-								if (fredButtons[n-1].buttonSprite === item) {
-									pressButtonFunction(buttonId: n)
-								}
+							/// Config Scene
+							if gameControls.scoreButtonSprite === item {
+								gameViewController.sceneStateMachine.enter(ScoresSceneState.self)
 							}
+//							else {
+//								/// Play buttons when ReadyToPlay state, no effect on Game
+//								for n in 1...12 {
+//									if (fredButtons[n-1].buttonSprite === item) {
+//										pressButtonFunction(buttonId: n, multiple: false)
+//									}
+//								}
+//							}
 						}
 					}
 				}
@@ -273,9 +270,20 @@ class GameScene: SKScene {
 		/// Touch Up
 		override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 			
-			/// Release Button Action when on practice mode
+			/// On ReadyToPlay state (aka Practice mode)
 			if (fredGameStateMachine.currentState is ReadyToPlay) {
-				delayedReleaseButtonFunction(delayed: true)
+				
+				// Start Game if startSwitch is set to true
+				if gameControls.startSwitch.beingSet {
+					gameControls.startSwitch.beingSet = false
+					if gameControls.startSwitch.setFromPosition() {
+						fredGameStateMachine.enter(StartGame.self)
+					}
+				}
+				// Release Button on Pratice mode
+				if isAButtonPlaying {
+					delayedReleaseButtonFunction(delayed: true, clear: false)
+				}
 			}
 			
 			/// Release Button Action when on game mode
@@ -283,5 +291,15 @@ class GameScene: SKScene {
 				fredGameStateMachine.enter(PlayerReleaseButton.self)
 			}
 		}
+	
+	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+		let pos = touches.first!.location(in: self)
+		
+		/// StartSwitch being set
+		if gameControls.startSwitch.beingSet {
+			gameControls.startSwitch.movingSwitch(point: convert(pos, to: gameControls.startSwitch).x)
+		}
+		
+	}
 	
 }

@@ -19,14 +19,14 @@ class PlayerReleaseButton: FredGameState {
         super.didEnter(from: previousState)
         
         /// Button release
-        game.delayedReleaseButtonFunction(delayed: true)
+        game.delayedReleaseButtonFunction(delayed: true, clear: false)
         /// If button is correct go to PlayerPlayingSequence state
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
             game.fredGameStateMachine.enter(PlayerPlayingSequence.self)
         }
         /// If button is wrong then go to GameOver state
         else {
-            game.fredGameStateMachine.enter(GameOver.self)
+            game.fredGameStateMachine.enter(PlayerError.self)
         }
     }
     
@@ -37,7 +37,7 @@ class PlayerReleaseButton: FredGameState {
             /// Increase sequenceCounter
             game.sequenceCounter += 1
         }
-        if nextState is GameOver {
+        if nextState is PlayerError {
             
             /// Nothing to declare :)
         }
@@ -45,7 +45,7 @@ class PlayerReleaseButton: FredGameState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is PlayerPlayingSequence.Type, is GameOver.Type:
+        case is PlayerPlayingSequence.Type, is PlayerError.Type:
             return true
         default:
             return false
