@@ -6,14 +6,6 @@
 //  Copyright © 2018 Cartwheel Galaxy. All rights reserved.
 //
 
-//
-//  Control.swift
-//  Fred-iOS
-//
-//  Created by Fernando Vazquez on 3/19/18.
-//  Copyright © 2018 Cartwheel Galaxy. All rights reserved.
-//
-
 import SpriteKit
 
 struct ConfigControls {

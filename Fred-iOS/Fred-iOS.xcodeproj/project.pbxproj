@@ -111,7 +111,6 @@
 			children = (
 				CB9084FC204F42FE00CA0E57 /* GameScene.swift */,
 				CB19F62220637AAA0020AD28 /* GameElements */,
-				CB779076205A193B004A3213 /* FredStates */,
 				CB233B362061F3F200FC1A32 /* ConfigScene.swift */,
 				CB5FCED7206623A0000BE1DF /* ConfigElements */,
 				CBC08E872071D4A400EA6354 /* ScoresScene.swift */,
@@ -129,6 +128,7 @@
 				CB779077205A537C004A3213 /* GameOverMessage.swift */,
 				CBC08E83207180C600EA6354 /* SwitchSK.swift */,
 				CBC08E7F206ECE5200EA6354 /* Trace.sks */,
+				CB779076205A193B004A3213 /* FredStates */,
 			);
 			path = GameElements;
 			sourceTree = "<group>";
