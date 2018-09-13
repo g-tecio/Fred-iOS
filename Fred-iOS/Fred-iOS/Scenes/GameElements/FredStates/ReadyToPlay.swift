@@ -18,9 +18,6 @@ class ReadyToPlay: FredGameState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
 		
-        // State
-        game.scoreboard.stateSprint.texture = game.scoreboard.state1Texture
-		
         /// Set Start Switch to Off
 		game.gameControls.startSwitch.valueSwitchSK = false
 		
@@ -28,9 +25,6 @@ class ReadyToPlay: FredGameState {
     
     override func willExit(to nextState: GKState) {
         super.willExit(to: nextState)
-        
-		/// Remove Effect
-		game.lastPosition.x = -100
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

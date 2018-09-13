@@ -24,14 +24,6 @@ class PlayerPressButton: FredGameState {
         if (game.idButtonPlaying == game.sequenceList[game.sequenceCounter]) {
             game.score += 1
 			game.gameControls.startSwitch.labelInsideSwitchSK.text = "\(game.score)"
-            game.scoreboard.score.text = "\(game.score)"
-            game.scoreboard.playerCount.text = "\(game.sequenceCounter+1)"
-            game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOn
-        }
-        /// If button is wrong set playerErrorOn
-        else {
-            game.scoreboard.playerError.texture = game.scoreboard.playerErrorOn
-            game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
         }
     }
     

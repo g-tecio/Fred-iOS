@@ -17,10 +17,7 @@ class PlayerPlayingSequence: FredGameState {
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
-        
-        /// State
-        game.scoreboard.stateSprint.texture = game.scoreboard.state4Texture
-        
+		
         /// If Player played full sequence go to FredAddsRandomButton state
         if (game.sequenceList.count == game.sequenceCounter) {
             game.fredGameStateMachine.enter(FredAddsRandomButton.self)
@@ -38,28 +35,9 @@ class PlayerPlayingSequence: FredGameState {
             /// Nothing to declare :)
         }
         if nextState is FredAddsRandomButton {
-            
             /// Game variables
             game.sequenceCounter = 0
             game.cycles += 1
-            
-            /// Set Sprites
-            game.scoreboard.playerLabel.fontColor = .lightGray
-            game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
-            game.scoreboard.fredLabel.fontColor = .blue
-            game.scoreboard.fredCount.text = "0"
-            
-            game.scoreboard.playerStars[(game.cycles-1) % 5].texture = game.scoreboard.starOn
-            
-            if (game.cycles % 5) == 0 {
-                for i in 1...5 {
-                    game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
-                }
-            }
-            if (game.cycles >= 5) {
-                game.scoreboard.playerStars[Int(game.cycles/5)+4].texture = game.scoreboard.starOn
-            }
-            
         }
     }
     

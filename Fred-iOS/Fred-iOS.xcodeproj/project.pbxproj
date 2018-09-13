@@ -11,7 +11,6 @@
 		CB19F61C2062C7500020AD28 /* GameSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19F61B2062C7500020AD28 /* GameSceneState.swift */; };
 		CB19F61E2062C8A00020AD28 /* ConfigSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB19F61D2062C8A00020AD28 /* ConfigSceneState.swift */; };
 		CB1A10AA2057733300AB0F82 /* FredGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A10A92057733300AB0F82 /* FredGameState.swift */; };
-		CB1A10AD2057995900AB0F82 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A10AC2057995900AB0F82 /* Scoreboard.swift */; };
 		CB233B372061F3F200FC1A32 /* ConfigScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB233B362061F3F200FC1A32 /* ConfigScene.swift */; };
 		CB5FCED9206623BC000BE1DF /* SliderSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5FCED8206623BC000BE1DF /* SliderSK.swift */; };
 		CB5FCEDB20670724000BE1DF /* ConfigControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5FCEDA20670724000BE1DF /* ConfigControls.swift */; };
@@ -26,7 +25,6 @@
 		CB779071205A1914004A3213 /* PlayerPressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779070205A1914004A3213 /* PlayerPressButton.swift */; };
 		CB779073205A191E004A3213 /* PlayerReleaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779072205A191E004A3213 /* PlayerReleaseButton.swift */; };
 		CB779075205A192F004A3213 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779074205A192F004A3213 /* GameOver.swift */; };
-		CB779078205A537C004A3213 /* GameOverMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB779077205A537C004A3213 /* GameOverMessage.swift */; };
 		CB7F67F9206092F100C4C314 /* GameControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7F67F8206092F100C4C314 /* GameControls.swift */; };
 		CB9084F7204F42FE00CA0E57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9084F6204F42FE00CA0E57 /* AppDelegate.swift */; };
 		CB9084FD204F42FE00CA0E57 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9084FC204F42FE00CA0E57 /* GameScene.swift */; };
@@ -35,7 +33,6 @@
 		CB908504204F42FE00CA0E57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB908503204F42FE00CA0E57 /* Assets.xcassets */; };
 		CB908507204F42FE00CA0E57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB908505204F42FE00CA0E57 /* LaunchScreen.storyboard */; };
 		CB90850F204F4C3C00CA0E57 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90850E204F4C3C00CA0E57 /* Button.swift */; };
-		CBC08E81206ECE5200EA6354 /* Trace.sks in Resources */ = {isa = PBXBuildFile; fileRef = CBC08E7F206ECE5200EA6354 /* Trace.sks */; };
 		CBC08E84207180C600EA6354 /* SwitchSK.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC08E83207180C600EA6354 /* SwitchSK.swift */; };
 		CBC08E862071A14100EA6354 /* StartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC08E852071A14100EA6354 /* StartGame.swift */; };
 		CBC08E882071D4A400EA6354 /* ScoresScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC08E872071D4A400EA6354 /* ScoresScene.swift */; };
@@ -49,7 +46,6 @@
 		CB19F61B2062C7500020AD28 /* GameSceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneState.swift; sourceTree = "<group>"; };
 		CB19F61D2062C8A00020AD28 /* ConfigSceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigSceneState.swift; sourceTree = "<group>"; };
 		CB1A10A92057733300AB0F82 /* FredGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FredGameState.swift; sourceTree = "<group>"; };
-		CB1A10AC2057995900AB0F82 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		CB233B362061F3F200FC1A32 /* ConfigScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigScene.swift; sourceTree = "<group>"; };
 		CB5FCED8206623BC000BE1DF /* SliderSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSK.swift; sourceTree = "<group>"; };
 		CB5FCEDA20670724000BE1DF /* ConfigControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigControls.swift; sourceTree = "<group>"; };
@@ -64,7 +60,6 @@
 		CB779070205A1914004A3213 /* PlayerPressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPressButton.swift; sourceTree = "<group>"; };
 		CB779072205A191E004A3213 /* PlayerReleaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReleaseButton.swift; sourceTree = "<group>"; };
 		CB779074205A192F004A3213 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
-		CB779077205A537C004A3213 /* GameOverMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverMessage.swift; sourceTree = "<group>"; };
 		CB7F67F8206092F100C4C314 /* GameControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControls.swift; sourceTree = "<group>"; };
 		CB9084F3204F42FE00CA0E57 /* Fred-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fred-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9084F6204F42FE00CA0E57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +70,6 @@
 		CB908506204F42FE00CA0E57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB908508204F42FE00CA0E57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB90850E204F4C3C00CA0E57 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		CBC08E7F206ECE5200EA6354 /* Trace.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Trace.sks; sourceTree = "<group>"; };
 		CBC08E83207180C600EA6354 /* SwitchSK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchSK.swift; sourceTree = "<group>"; };
 		CBC08E852071A14100EA6354 /* StartGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGame.swift; sourceTree = "<group>"; };
 		CBC08E872071D4A400EA6354 /* ScoresScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresScene.swift; sourceTree = "<group>"; };
@@ -123,11 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				CB90850E204F4C3C00CA0E57 /* Button.swift */,
-				CB1A10AC2057995900AB0F82 /* Scoreboard.swift */,
 				CB7F67F8206092F100C4C314 /* GameControls.swift */,
-				CB779077205A537C004A3213 /* GameOverMessage.swift */,
 				CBC08E83207180C600EA6354 /* SwitchSK.swift */,
-				CBC08E7F206ECE5200EA6354 /* Trace.sks */,
 				CB779076205A193B004A3213 /* FredStates */,
 			);
 			path = GameElements;
@@ -229,7 +220,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Cartwheel Galaxy";
 				TargetAttributes = {
 					CB9084F2204F42FE00CA0E57 = {
@@ -265,7 +256,6 @@
 				CB908502204F42FE00CA0E57 /* Main.storyboard in Resources */,
 				CB908504204F42FE00CA0E57 /* Assets.xcassets in Resources */,
 				CB908507204F42FE00CA0E57 /* LaunchScreen.storyboard in Resources */,
-				CBC08E81206ECE5200EA6354 /* Trace.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,8 +281,6 @@
 				CB5FCEDB20670724000BE1DF /* ConfigControls.swift in Sources */,
 				CB233B372061F3F200FC1A32 /* ConfigScene.swift in Sources */,
 				CB9084F7204F42FE00CA0E57 /* AppDelegate.swift in Sources */,
-				CB1A10AD2057995900AB0F82 /* Scoreboard.swift in Sources */,
-				CB779078205A537C004A3213 /* GameOverMessage.swift in Sources */,
 				CB779075205A192F004A3213 /* GameOver.swift in Sources */,
 				CB19F61C2062C7500020AD28 /* GameSceneState.swift in Sources */,
 				CB1A10AA2057733300AB0F82 /* FredGameState.swift in Sources */,
@@ -346,6 +334,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -353,6 +342,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -403,6 +393,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -410,6 +401,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -20,9 +20,6 @@ struct GameControls {
 	/// Configuration Button
 	let configButtonSprite: SKSpriteNode
 	let scoreButtonSprite: SKSpriteNode
-	let errorSprite: SKSpriteNode
-	let errorOnTexture: SKTexture
-	let errorOffTexture: SKTexture
 	
 	/// Sound for button
 	let audioTonePlayerNode: AVAudioPlayerNode = AVAudioPlayerNode.init()
@@ -79,21 +76,11 @@ struct GameControls {
 		feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
 		feedbackGenerator.prepare()
 		
-		/// Error
-		errorOnTexture = SKTexture.init(imageNamed: "ErrorOn")
-		errorOffTexture = SKTexture.init(imageNamed: "ErrorOff")
-		errorSprite = SKSpriteNode.init(texture: errorOffTexture)
-		errorSprite.position = CGPoint(x: 10, y: 10)
-		
 		// Error Sound
 		playErrorSoundAction = playErrorSoundCreator(thisControl: self)
 	}
 	
 	func playErrorSoundCreator(thisControl: GameControls) ->SKAction {
-		
-		/// Action to turn on light in button
-		let errorOnSpriteAction = SKAction.animate(with: [errorOnTexture], timePerFrame: 0.0)
-		let errorOffSpriteAction = SKAction.animate(with: [errorOffTexture], timePerFrame: 0.0)
 		
 		let soundStartAction = SKAction.run {
 			if !thisControl.audioTonePlayerNode.isPlaying {
@@ -110,6 +97,6 @@ struct GameControls {
 		}
 		
 		/// Return action for Release
-		return SKAction.sequence( [errorOnSpriteAction, soundStartAction, SKAction.wait(forDuration: 1), soundEndAction, errorOffSpriteAction] )
+		return SKAction.sequence( [soundStartAction, SKAction.wait(forDuration: 1), soundEndAction] )
 	}
 }

@@ -34,9 +34,6 @@ class StartGame: FredGameState {
 		pauseTimeCounter = 0
 		timeForNextAction = 20/60
 		
-		/// Remove Effect
-		game.lastPosition.x = -100
-		
 		/// First Button to Play
 		indexStartAnimationSequence = 0
 		flagStartGame = false
@@ -55,28 +52,10 @@ class StartGame: FredGameState {
 		game.score = 0
 		
 		/// Hide Config and Score Buttons
-		game.gameControls.configButtonSprite.removeFromParent()
-		game.gameControls.scoreButtonSprite.removeFromParent()
+//		game.gameControls.configButtonSprite.removeFromParent()
+//		game.gameControls.scoreButtonSprite.removeFromParent()
 		game.gameControls.startSwitch.switchBar.removeFromParent()
 		game.gameControls.startSwitch.labelInsideSwitchSK.text = "\(game.score)"
-		
-		/// Scoreboard Setup
-		game.scoreboard.fredLabel.fontColor = .lightGray
-		game.scoreboard.fredRepeat.texture = game.scoreboard.fredRepeatOff
-		game.scoreboard.fredNew.texture = game.scoreboard.fredNewOff
-		game.scoreboard.fredCount.text = "0"
-		game.scoreboard.fredCount.fontColor = .black
-		game.scoreboard.playerLabel.fontColor = .lightGray
-		game.scoreboard.playerCorrect.texture = game.scoreboard.playerCorrectOff
-		game.scoreboard.playerError.texture = game.scoreboard.playerErrorOff
-		game.scoreboard.playerCount.text = "0"
-		game.scoreboard.playerCount.fontColor = .darkGray
-		game.scoreboard.score.text = "0"
-		game.scoreboard.score.fontColor = .white
-		for i in 1...10 {
-			game.scoreboard.playerStars[i-1].texture = game.scoreboard.starOff
-		}
-		
 	}
 	
 	override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -113,8 +92,6 @@ class StartGame: FredGameState {
 					else {
 						/// Turn Off next Button from Animation Sequence
 						game.delayedReleaseButtonFunction(delayed: false, clear: false)
-						/// Remove Effect
-						game.lastPosition.x = -100
 						/// Next action will be to release button
 						buttonOnState = false
 						/// Set timer

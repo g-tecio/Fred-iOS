@@ -21,25 +21,15 @@ class FredAddsRandomButton: FredGameState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
 		
-		/// State
-        game.scoreboard.stateSprint.texture = game.scoreboard.state2Texture
-		
 		/// New Value added to end of sequence
         game.sequenceList.append(game.newValue.nextInt())
-		
-		/// Set Last Postiton for TraceEffect
-		game.lastPosition = game.fredButtons[game.sequenceList[0]-1].buttonSprite.position
-        
+ 
 		/// Start timer
         pauseTimeCounter = 0
     }
     
     override func willExit(to nextState: GKState) {
         super.willExit(to: nextState)
-        
-        /// Set Sprit for Fred's turn
-        game.scoreboard.fredLabel.fontColor = .blue
-        game.scoreboard.fredRepeat.texture = game.scoreboard.fredRepeatOn
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
