@@ -75,12 +75,12 @@ class GameScene: SKScene {
 		if let skView = gameViewController.view as! SKView? {
 			self.size = skView.bounds.size
 			self.scaleMode = .aspectFill
-			self.backgroundColor = .white
+			self.backgroundColor = .black
 			
 			// TODO: Comment or remove before release to App Store
-			skView.ignoresSiblingOrder = true
-			skView.showsFPS = true
-			skView.showsNodeCount = true
+//			skView.ignoresSiblingOrder = true
+//			skView.showsFPS = true
+//			skView.showsNodeCount = true
 		}
 	}
 	

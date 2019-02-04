@@ -46,7 +46,7 @@ class SwitchSK: SKNode {
 		self.valueSwitchSK = initialValue
 		
 		/// Label Value setup
-		labelInsideSwitchSK = SKLabelNode(fontNamed: "Play")
+		labelInsideSwitchSK = SKLabelNode(fontNamed: "Helvetica")
 		labelInsideSwitchSK.text = ""
 		labelInsideSwitchSK.fontSize = 48
 		labelInsideSwitchSK.fontColor = .white
